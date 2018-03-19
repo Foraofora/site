@@ -1,0 +1,20 @@
+{
+  "name": "fora",
+  "version": "1.0.0",
+  "description": "Fora website made with next.js and a headless CMS",
+  "main": "next",
+  "author": "Diogo Vianna",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^5.0.0",
+    "prismic-javascript": "^1.5.0-beta.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-responsive": "^4.0.5"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}
