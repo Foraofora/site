@@ -14,5 +14,6 @@ const wrapperStyle = {
   paddingTop: 21,
   paddingLeft: 29,
   paddingRight: 29,
-  paddingBottom: 21
+  paddingBottom: 21,
+  boxSizing: 'border-box'
 }
