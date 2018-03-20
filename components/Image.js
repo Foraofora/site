@@ -11,5 +11,5 @@ export default class Image extends React.Component {
 const baseStyle = {
   maxWidth: '100%',
   maxHeight: '100%',
-  objectFit: 'contain'
+  flex: 0
 }

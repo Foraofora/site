@@ -21,12 +21,12 @@ export default class Index extends React.Component {
         <LogoWithMenu invert />
         <PageWrapper style={coverWrapperStyle}>
           <Title>/Ações & Imaginações /Arte</Title>
-          <div style={coverMidStyle}>
-            <h1 style={h1Style}>{ document.data.title[0].text }</h1>
-            <div style={imageWrapperStyle}>
-              <Image src={ document.data.photos[0].photo.url } />
+            <div style={coverMidStyle}>
+              <h1 style={h1Style}>{ document.data.title[0].text }</h1>
+              <div style={imageWrapperStyle}>
+                <Image src={ document.data.photos[0].photo.url } />
+              </div>
             </div>
-          </div>
           <div style={coverBotStyle}>
             <p style={dateStyle} />
             <p style={authorStyle}>{ 'Por '+document.data.author.data.name[0].text }</p>
@@ -45,21 +45,26 @@ const coverWrapperStyle = {
   height: '100vh',
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-between'
+}
+const coverMidWrapperStyle = {
+  display: 'flex',
+  justifyContent: 'space-between'
 }
 const coverMidStyle = {
   display: 'flex',
-  flex: 1,
   justifyContent: 'space-between'
 }
 const coverBotStyle = {
   display: 'flex',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  maxHeight: 91
 }
 const imageWrapperStyle = {
   display: 'flex',
-  maxWidth: '70%',
-  marginTop: '30px',
-  alignItems: 'flex-end'
+  marginTop: 50,
+  alignItems: 'flex-end',
+  justifyContent: 'flex-end'
 }
 
 const h1Style = {
