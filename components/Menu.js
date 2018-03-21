@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from './Modal'
-import Link from 'next/link'
-import SignupForm from '../components/SignupForm'
+import MenuLink from './MenuLink'
+import SignupForm from './SignupForm'
 
 export default class Menu extends React.Component {
   state = {
@@ -14,18 +14,18 @@ export default class Menu extends React.Component {
     return (
       <Modal visible={visible} style={menuModalStyle} onBgClick={onBgClick}>
         <div style={mainMenuWrapperStyle}>
-          <Link href={{ pathname: '/o-que-e' }}><a style={menuTextStyle}>O que é;</a></Link>
-          <Link href={{ pathname: '/acoes' }}><a style={menuTextStyle}>Ações & imaginações;</a></Link>
+          <MenuLink href={{ pathname: '/o-que-e' }}>O que é;</MenuLink>
+          <MenuLink href={{ pathname: '/acoes' }}>Ações & imaginações;</MenuLink>
         </div>
         <div style={secondaryMenuWrapperStyle}>
           <span style={menuTextStyle}>Mapa do site;</span><br />
-          <a href='#' onClick={this.toggleSignup} style={menuTextStyle}>Boletim Informativo;</a>
+          <MenuLink onClick={this.toggleSignup}>Boletim Informativo;</MenuLink>
         </div>
         <div style={socialMenuWrapperStyle}>
-          <Link href="http://facebook.com"><a style={menuTextStyle}>Fb;</a></Link>
-          <Link href="http://facebook.com"><a style={menuTextStyle}>Tw;</a></Link>
-          <Link href="http://facebook.com"><a style={menuTextStyle}>Ig;</a></Link>
-          <Link href="http://facebook.com"><a style={menuTextStyle}>Yt;</a></Link>
+          <MenuLink href="http://facebook.com">Fb;</MenuLink>
+          <MenuLink href="http://facebook.com">Tw;</MenuLink>
+          <MenuLink href="http://facebook.com">Ig;</MenuLink>
+          <MenuLink href="http://facebook.com">Yt;</MenuLink>
         </div>
         <Modal visible={showSignup} onBgClick={this.toggleSignup}>
           <SignupForm />

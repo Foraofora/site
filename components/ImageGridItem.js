@@ -1,20 +1,20 @@
 import React from 'react'
-import Link from 'next/link'
+import Link from './Link'
 
 export default class ImageGridItem extends React.Component {
   render() {
-    console.log(this.props)
+    const { data, type, id } = this.props
+    const title = data.title instanceof Array ? data.title[0].text : false
+    const author = data.author.data ? data.author.data.name[0].text : false
     return (
       <div style={wrapperStyle}>
-        <Link href={{ pathname: '/acoes/'+this.props.type, query: { id: this.props.id } }}>
-          <a>
-            <div style={imageStackStyle}>
-              {this.renderPhotos()}
-            </div>
-            <h3 style={titleStyle}>
-              {this.props.data.title[0].text}<br/>-<br/>{this.props.data.author.data.name[0].text}
-            </h3>
-          </a>
+        <Link href={{ pathname: '/acoes/'+type, query: { id: id } }}>
+          <div style={imageStackStyle}>
+            {this.renderPhotos()}
+          </div>
+          <h3 style={titleStyle}>
+            {title}<br/>-<br/>{author}
+          </h3>
         </Link>
       </div>
     )
@@ -25,8 +25,12 @@ export default class ImageGridItem extends React.Component {
     if (photos.length) {
       return (
         <div>
-          <div style={imageWrapperStyle}><img src={photos[0].photo.url} style={imageStyle} /></div>
-          <div style={imageWrapperStyle}><img src={photos[1].photo.url} style={imageStyle} /></div>
+          <div style={{...imageWrapperStyle, transform: 'translate3d(7px, -7px, 0)'}}>
+            <img src={photos[0].photo.thumb.url} style={imageStyle} />
+          </div>
+          <div style={{...imageWrapperStyle, transform: 'translate3d(-7px, 7px, 0)'}}>
+            <img src={photos[1].photo.thumb.url} style={imageStyle} />
+          </div>
         </div>
       )
     }
@@ -35,7 +39,8 @@ export default class ImageGridItem extends React.Component {
 }
 
 const wrapperStyle = {
-  margin: 20
+  margin: 20,
+  width: 200
 }
 const imageStackStyle = {
   width: 200,
@@ -57,5 +62,8 @@ const imageStyle = {
   maxHeight: '100%'
 }
 const titleStyle = {
-  textAlign: 'center'
+  textAlign: 'center',
+  fontFamily: "'Source Serif Pro', serif",
+  fontSize: 26,
+  fontWeight: 600
 }

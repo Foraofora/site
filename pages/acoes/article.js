@@ -26,7 +26,7 @@ export default class Index extends React.Component {
           <div style={coverMidStyle}>
             <h1 style={h1Style}>{ document.data.title[0].text }</h1>
             <div style={imageWrapperStyle}>
-              <Image src={ document.data.photos[0].photo.url } />
+              <Image src={ document.data.cover.url } />
             </div>
           </div>
           <div style={coverBotStyle}>

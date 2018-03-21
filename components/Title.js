@@ -13,7 +13,7 @@ export default class Title extends React.Component {
 const baseStyle = {
   fontFamily: "'Source Serif Pro', serif",
   fontWeight: 600,
-  fontSize: 40,
+  fontSize: 41,
   margin: 0,
   marginLeft: 145
 }
