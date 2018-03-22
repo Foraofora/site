@@ -17,23 +17,23 @@ export default class Index extends React.Component {
     const { document } = this.props
     const author = document.data.author.data && document.data.author.data.name[0].text
     const bio = document.data.author.data && document.data.author.data.bio[0].text
+    console.log(document.data.body)
     return (
-      <div style={{background: '#000', color: 'white', fontFamily: "'Source Serif Pro', serif"}}>
-        <LogoWithMenu invert />
+      <div style={{background: '#DFDFDF'}}>
+        <LogoWithMenu/>
 
-        <PageWrapper style={coverWrapperStyle}>
+        <PageWrapper style={{...coverWrapperStyle, backgroundImage: `url(${document.data.cover.url})`}}>
           <Title>/Ações & Imaginações /Arte</Title>
-          <div style={coverMidStyle}>
+          <div>
             <h1 style={h1Style}>{ document.data.title[0].text }</h1>
-            <div style={imageWrapperStyle}>
-              <Image src={ document.data.cover.url } />
+            <div style={h1Style}>-</div>
+            <div style={coverBotStyle}>
+              <p style={authorStyle}>{ 'Por '+author }</p>
+              <p style={dateStyle}>{ /*document.last_publication_date*/"18.02.18" }</p>
             </div>
           </div>
-          <div style={coverBotStyle}>
-            <p style={dateStyle} />
-            <p style={authorStyle}>{ 'Por '+author }</p>
-            <p style={dateStyle}>{ /*document.last_publication_date*/"18.02.18" }</p>
-          </div>
+
+          <P style={teaserStyle}>{ document.data.teaser }</P>
         </PageWrapper>
 
         <PageWrapper style={{marginTop: 50, position: 'relative'}}>
@@ -41,7 +41,7 @@ export default class Index extends React.Component {
             <div>{ document.data.title[0].text }</div>
             <div>{ author }</div>
           </div>
-          <P style={bodyStyle}>{ document.data.corpo }</P>
+          <P style={bodyStyle}>{ document.data.body[0].primary.text }</P>
           <P style={bioStyle}>{ bio }</P>
         </PageWrapper>
 
@@ -54,23 +54,17 @@ const coverWrapperStyle = {
   height: '100vh',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between'
-}
-const coverMidStyle = {
-  display: 'flex',
   justifyContent: 'space-between',
-  maxHeight: '80%'
+  backgroundSize: 'cover',
+  backgroundPosition: 'center center',
+  fontFamily: "'Source Serif Pro', serif"
 }
+
 const coverBotStyle = {
   display: 'flex',
   justifyContent: 'space-between',
-  maxHeight: 91
-}
-const imageWrapperStyle = {
-  display: 'flex',
-  marginTop: 50,
-  alignItems: 'flex-end',
-  justifyContent: 'flex-end'
+  maxHeight: 91,
+  fontSize: 41,
 }
 
 const h1Style = {
@@ -79,23 +73,24 @@ const h1Style = {
   marginBottom: 0,
   fontSize: 41,
   fontWeight: 'normal',
-  marginBottom: -8
 }
 
 const authorStyle = {
-  fontSize: 41,
-  textAlign: 'center',
-  marginBottom: 0,
-  maxHeight: 85
+  margin: 0,
 }
 
 const dateStyle = {
   width: 200,
   textAlign: 'right',
-  fontSize: 41,
-  marginBottom: 0
+  margin: 0
 }
-
+const teaserStyle = {
+  fontSize: 22,
+  fontWeight: 600,
+  maxWidth: 780,
+  paddingLeft: 160,
+  paddingRight: 160
+}
 const bodyTitleStyle = {
   position: 'absolute',
   transform: 'rotateZ(-90deg)',

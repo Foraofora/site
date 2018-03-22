@@ -76,7 +76,6 @@ const imageWrapperStyle = {
 const h1Style = {
   paddingRight: 30,
   alignSelf: 'flex-end',
-  marginBottom: 0,
   fontSize: 41,
   fontWeight: 'normal',
   marginBottom: -8
