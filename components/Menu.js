@@ -5,27 +5,29 @@ import SignupForm from './SignupForm'
 
 export default class Menu extends React.Component {
   state = {
-    showSignup: false
+    showSignup: false,
+    background: false
   }
 
   render() {
-    const { showSignup } = this.state
-    const { visible, onBgClick } = this.props
+    const { props, state, handleMenuMouseEnter, handleMenuMouseLeave, toggleSignup } = this
+    const { showSignup, background } = state
+    const { visible, onBgClick } = props
     return (
-      <Modal visible={visible} style={menuModalStyle} onBgClick={onBgClick}>
+      <Modal visible={visible} style={{...menuModalStyle, backgroundImage: background}} onBgClick={onBgClick}>
         <div style={mainMenuWrapperStyle}>
-          <MenuLink href={{ pathname: '/o-que-e' }}>O que é;</MenuLink>
-          <MenuLink href={{ pathname: '/acoes' }}>Ações & imaginações;</MenuLink>
+          <MenuLink href={{ pathname: '/o-que-e' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave}>O que é;</MenuLink>
+          <MenuLink href={{ pathname: '/acoes' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave}>Ações & imaginações;</MenuLink>
         </div>
         <div style={secondaryMenuWrapperStyle}>
           <span style={menuTextStyle}>Mapa do site;</span><br />
-          <MenuLink onClick={this.toggleSignup}>Boletim Informativo;</MenuLink>
+          <MenuLink onClick={toggleSignup} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave}>Boletim Informativo;</MenuLink>
         </div>
         <div style={socialMenuWrapperStyle}>
-          <MenuLink href="http://facebook.com">Fb;</MenuLink>
-          <MenuLink href="http://facebook.com">Tw;</MenuLink>
-          <MenuLink href="http://facebook.com">Ig;</MenuLink>
-          <MenuLink href="http://facebook.com">Yt;</MenuLink>
+          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='fb'>Fb;</MenuLink>
+          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave}>Tw;</MenuLink>
+          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='ig'>Ig;</MenuLink>
+          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='yt'>Yt;</MenuLink>
         </div>
         <Modal visible={showSignup} onBgClick={this.toggleSignup}>
           <SignupForm />
@@ -37,10 +39,21 @@ export default class Menu extends React.Component {
   toggleSignup = (event) => {
     this.setState({showSignup: !this.state.showSignup})
   }
+
+  handleMenuMouseEnter = (key) => {
+    this.setState({background: `url("/static/menu-${key}.png")`})
+  }
+  handleMenuMouseLeave = () => {
+    this.setState({background: false})
+  }
+
 }
 
 const menuModalStyle = {
-  background: 'rgba(255,255,255,0.93)'
+  background: 'rgba(255,255,255,0.95)',
+  backgroundSize: '80%',
+  backgroundPosition: 'center center',
+  backgroundRepeat: 'no-repeat'
 }
 
 const menuTextStyle = {
@@ -52,8 +65,8 @@ const menuTextStyle = {
 
 const mainMenuWrapperStyle = {
   position: 'fixed',
-  left: 190,
-  top: 24
+  left: 165,
+  top: 21
 }
 
 const secondaryMenuWrapperStyle = {

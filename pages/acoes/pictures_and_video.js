@@ -3,20 +3,26 @@ import Prismic from 'prismic-javascript'
 import LogoWithMenu from '../../components/LogoWithMenu'
 import PageWrapper from '../../components/PageWrapper'
 import Title from '../../components/Title'
+import FloatingTitle from '../../components/FloatingTitle'
+import CategoryTeaser from '../../components/CategoryTeaser'
+import AuthorTeaser from '../../components/AuthorTeaser'
+import TagsTeaser from '../../components/TagsTeaser'
 import Image from '../../components/Image'
 import P from '../../components/Paragraph'
+
 export default class Index extends React.Component {
 
   static async getInitialProps({ req, query }) {
     const api = await Prismic.api("https://fora.prismic.io/api/v2")
-    const document = await api.getByID(query.id, {'fetchLinks': ['author.name', 'author.bio']})
+    const document = await api.getByID(query.id, {'fetchLinks': ['author.name', 'author.bio', 'author.photo', 'category.name', 'category.description']})
     return { document }
   }
 
   render() {
     const { document } = this.props
-    const author = document.data.author.data && document.data.author.data.name[0].text
-    const bio = document.data.author.data && document.data.author.data.bio[0].text
+    const { author } = document.data
+    const authorName = author.data && author.data.name[0].text
+    const title = document.data.title[0].text
     return (
       <div style={{background: '#000', color: 'white', fontFamily: "'Source Serif Pro', serif"}}>
         <LogoWithMenu invert />
@@ -31,20 +37,30 @@ export default class Index extends React.Component {
           </div>
           <div style={coverBotStyle}>
             <p style={dateStyle} />
-            <p style={authorStyle}>{ 'Por '+author }</p>
+            <p style={authorStyle}>{ 'Por '+authorName }</p>
             <p style={dateStyle}>{ /*document.last_publication_date*/"18.02.18" }</p>
           </div>
         </PageWrapper>
 
         <PageWrapper style={{marginTop: 50, position: 'relative'}}>
-          <div style={bodyTitleStyle}>
-            <div>{ document.data.title[0].text }</div>
-            <div>{ author }</div>
-          </div>
+          <FloatingTitle author={authorName} title={title} />
+          {this.renderRightSidebar()}
           <P style={bodyStyle}>{ document.data.corpo }</P>
-          <P style={bioStyle}>{ bio }</P>
+          <AuthorTeaser author={author} style={{marginTop: 80}} />
         </PageWrapper>
+      </div>
+    )
+  }
 
+  renderRightSidebar = () => {
+    const { category } = this.props.document.data
+    const { tags } = this.props.document
+    return (
+      <div style={{position: 'relative'}}>
+        <div style={{position: 'absolute', right: 0, width: 160}}>
+          <CategoryTeaser category={category} />
+          <TagsTeaser tags={tags} />
+        </div>
       </div>
     )
   }
@@ -78,7 +94,8 @@ const h1Style = {
   alignSelf: 'flex-end',
   fontSize: 41,
   fontWeight: 'normal',
-  marginBottom: -8
+  marginBottom: -8,
+  maxWidth: 480
 }
 
 const authorStyle = {
@@ -95,21 +112,7 @@ const dateStyle = {
   marginBottom: 0
 }
 
-const bodyTitleStyle = {
-  position: 'absolute',
-  transform: 'rotateZ(-90deg)',
-  textAlign: 'center',
-  top: 150,
-  fontFamily: 'IntervalBook, monospace',
-  fontSize: 16,
-  maxWidth: 260
-}
 const bodyStyle = {
   fontFamily: "'Source Sans Pro', sans-serif",
   fontSize: 16
-}
-const bioStyle = {
-  fontFamily: 'IntervalBook, monospace',
-  fontSize: 12,
-  marginTop: 50
 }

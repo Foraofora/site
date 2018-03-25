@@ -19,13 +19,22 @@ export default class MenuLink extends React.Component {
     return (
       <span
         style={{position: 'relative'}}
-        onMouseEnter={()=>this.setState({hover: true})}
-        onMouseLeave={()=>this.setState({hover: false})}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       >
         <span style={this.state.hover ? underlineStyle : {}} />
         {this.renderLink()}
       </span>
     )
+  }
+
+  handleMouseEnter = (event) => {
+    this.props.onMouseEnter && this.props.onMouseEnter(this.props.menuKey)
+    this.setState({hover: true})
+  }
+  handleMouseLeave = (event) => {
+    this.props.onMouseLeave && this.props.onMouseLeave(this.props.menuKey)
+    this.setState({hover: false})
   }
 }
 
