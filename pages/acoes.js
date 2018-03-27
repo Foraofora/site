@@ -1,24 +1,16 @@
 import React from 'react'
-import Prismic from 'prismic-javascript'
-import LogoWithMenu from '../components/LogoWithMenu'
-import PageWrapper from '../components/PageWrapper'
+import { getAcoes } from '../lib/backend'
+import PageWrapper from '../components/struct/PageWrapper'
+import ContentWrapper from '../components/struct/ContentWrapper'
 import Title from '../components/Title'
 import CategorySelector from '../components/CategorySelector'
 import ImageGrid from '../components/ImageGrid'
-import Footer from '../components/Footer'
 
-export default class Index extends React.Component {
+export default class pageAcoes extends React.Component {
 
   static async getInitialProps({ req }) {
-    const api = await Prismic.api("https://fora.prismic.io/api/v2")
-    const docQuery = await api.query(
-      Prismic.Predicates.any("document.type", ["article", "pictures_and_video"]),
-      {'fetchLinks': ['author.name', 'category.name']}
-    )
-    const catQuery = await api.query(
-      Prismic.Predicates.any("document.type", ["category"])
-    )
-    return { documents: docQuery.results, categories: catQuery.results }
+    const { documents, categories } = await getAcoes()
+    return { documents, categories }
   }
 
   state = {
@@ -29,9 +21,8 @@ export default class Index extends React.Component {
     const { documents, categories } = this.props
     const { selectedCategory } = this.state
     return (
-      <div style={{background: '#DFDFDF'}}>
-        <LogoWithMenu />
-        <PageWrapper>
+      <PageWrapper style={{background: '#DFDFDF'}}>
+        <ContentWrapper>
           <Title>/Ações & Imaginações</Title>
           <CategorySelector
             categories={categories}
@@ -39,11 +30,8 @@ export default class Index extends React.Component {
             onClick={this.handleCategorySelection}
           />
           <ImageGrid items={documents} category={selectedCategory} />
-        </PageWrapper>
-        <PageWrapper>
-          <Footer />
-        </PageWrapper>
-      </div>
+        </ContentWrapper>
+      </PageWrapper>
     )
   }
 

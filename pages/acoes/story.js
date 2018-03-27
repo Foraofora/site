@@ -1,36 +1,37 @@
 import React from 'react'
 import Prismic from 'prismic-javascript'
+import LogoWithMenu from '~/components/LogoWithMenu'
 import PageWrapper from '~/components/struct/PageWrapper'
 import ContentWrapper from '~/components/struct/ContentWrapper'
 import Title from '~/components/Title'
 import FloatingTitle from '~/components/FloatingTitle'
-import CategoryTeaser from '~/components/CategoryTeaser'
 import AuthorTeaser from '~/components/AuthorTeaser'
-import TagsTeaser from '~/components/TagsTeaser'
 import Image from '~/components/base/Image'
 import P from '~/components/base/Paragraph'
 
-export default class Index extends React.Component {
+export default class Story extends React.Component {
 
   static async getInitialProps({ req, query }) {
     const api = await Prismic.api("https://fora.prismic.io/api/v2")
-    const document = await api.getByID(query.id, {'fetchLinks': ['author.name', 'author.bio', 'author.photo', 'category.name', 'category.description']})
+    const document = await api.getByID(query.id, {'fetchLinks': ['author.name', 'author.bio', 'author.photo']})
     return { document }
   }
 
   render() {
     const { document } = this.props
-    const { author } = document.data
-    const authorName = author.data && author.data.name[0].text
     const title = document.data.title[0].text
+    const { author } = document.data
+    const authorName = document.data.author.data && document.data.author.data.name[0].text
+    const bio = document.data.author.data && document.data.author.data.bio && document.data.author.data.bio[0].text
+
     return (
-      <PageWrapper invert style={{background: '#000', color: 'white', fontFamily: "'Source Serif Pro', serif"}}>
+      <PageWrapper style={{background: '#DFDFDF', fontFamily: "'Source Serif Pro', serif"}}>
         <ContentWrapper style={coverWrapperStyle}>
           <Title>/Ações & Imaginações /Arte</Title>
           <div style={coverMidStyle}>
             <h1 style={h1Style}>{ document.data.title[0].text }</h1>
             <div style={imageWrapperStyle}>
-              <Image src={ document.data.photos[0].photo.url } />
+              <Image src={ document.data.cover.url } />
             </div>
           </div>
           <div style={coverBotStyle}>
@@ -42,26 +43,25 @@ export default class Index extends React.Component {
 
         <ContentWrapper style={{marginTop: 50, position: 'relative'}}>
           <FloatingTitle author={authorName} title={title} />
-          {this.renderRightSidebar()}
-          <P style={bodyStyle}>{ document.data.corpo }</P>
+          {this.renderBody()}
           <AuthorTeaser author={author} style={{marginTop: 80}} />
         </ContentWrapper>
       </PageWrapper>
     )
   }
 
-  renderRightSidebar = () => {
-    const { category } = this.props.document.data
-    const { tags } = this.props.document
-    return (
-      <div style={{position: 'relative'}}>
-        <div style={{position: 'absolute', right: 0, width: 160}}>
-          <CategoryTeaser category={category} />
-          <TagsTeaser tags={tags} />
-        </div>
-      </div>
-    )
+  renderBody = () => {
+    const { document } = this.props
+    return document.data.body.map(slice => {
+      if (slice.slice_type == 'text') return (
+        <P style={bodyStyle}>{ slice.primary.text }</P>
+      )
+      if (slice.slice_type == 'quote') return (
+        <Quote {...slice.primary} />
+      )
+    })
   }
+
 }
 
 const coverWrapperStyle = {
@@ -70,6 +70,7 @@ const coverWrapperStyle = {
   flexDirection: 'column',
   justifyContent: 'space-between'
 }
+
 const coverMidStyle = {
   display: 'flex',
   justifyContent: 'space-between',
@@ -90,10 +91,9 @@ const imageWrapperStyle = {
 const h1Style = {
   paddingRight: 30,
   alignSelf: 'flex-end',
+  marginBottom: 0,
   fontSize: 41,
   fontWeight: 'normal',
-  marginBottom: -8,
-  maxWidth: 480
 }
 
 const authorStyle = {

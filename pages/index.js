@@ -18,11 +18,11 @@ export default class Index extends React.Component {
   }
 
   render() {
-    const { title } = this.props
+    const { title, documents } = this.props
     return (
       <div>
         <LogoWithMenu flash slogan={ title } />
-        <SliderTunnel />
+        <SliderTunnel documents={documents} />
       </div>
     )
   }

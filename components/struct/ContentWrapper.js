@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class PageWrapper extends React.Component {
+export default class ContentWrapper extends React.Component {
   render() {
     return (
       <div style={{...wrapperStyle, ...this.props.style}}>

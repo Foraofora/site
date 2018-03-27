@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "next": "^5.0.0",
+    "nprogress": "^0.2.0",
     "prismic-javascript": "^1.5.0-beta.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -16,5 +17,14 @@
     "dev": "next",
     "build": "next build",
     "start": "next start"
+  },
+  "devDependencies": {
+    "babel-plugin-root-import": "^5.1.0"
+  },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ],
+    "plugins": ["babel-plugin-root-import"]
   }
 }

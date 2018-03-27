@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from './Modal'
+import Modal from '~/components/struct/Modal'
 import MenuLink from './MenuLink'
 import SignupForm from './SignupForm'
 
@@ -16,8 +16,8 @@ export default class Menu extends React.Component {
     return (
       <Modal visible={visible} style={{...menuModalStyle, backgroundImage: background}} onBgClick={onBgClick}>
         <div style={mainMenuWrapperStyle}>
-          <MenuLink href={{ pathname: '/o-que-e' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave}>O que é;</MenuLink>
-          <MenuLink href={{ pathname: '/acoes' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave}>Ações & imaginações;</MenuLink>
+          <MenuLink href={{ pathname: '/o-que-e' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='oque'>O que é;</MenuLink>
+          <MenuLink href={{ pathname: '/acoes' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='acoes'>Ações & imaginações;</MenuLink>
         </div>
         <div style={secondaryMenuWrapperStyle}>
           <span style={menuTextStyle}>Mapa do site;</span><br />
@@ -25,7 +25,7 @@ export default class Menu extends React.Component {
         </div>
         <div style={socialMenuWrapperStyle}>
           <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='fb'>Fb;</MenuLink>
-          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave}>Tw;</MenuLink>
+          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='tw'>Tw;</MenuLink>
           <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='ig'>Ig;</MenuLink>
           <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='yt'>Yt;</MenuLink>
         </div>
@@ -53,7 +53,8 @@ const menuModalStyle = {
   background: 'rgba(255,255,255,0.95)',
   backgroundSize: '80%',
   backgroundPosition: 'center center',
-  backgroundRepeat: 'no-repeat'
+  backgroundRepeat: 'no-repeat',
+  color: 'black'
 }
 
 const menuTextStyle = {

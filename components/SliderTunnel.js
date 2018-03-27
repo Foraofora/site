@@ -8,8 +8,9 @@ export default class SliderTunnel extends React.Component {
     currentSlide: 0
   }
 
-  componentWillMount() {
-    setInterval(()=>this.setState({slides: [...this.state.slides, <SliderTunnelImage />]}), 2000)
+  componentDidMount() {
+    this.renderNextImage()
+    setInterval(this.renderNextImage, 2000)
   }
 
   render() {
@@ -19,10 +20,17 @@ export default class SliderTunnel extends React.Component {
       </div>
     )
   }
+
+  renderNextImage = () => {
+    const { documents } = this.props
+    const document = documents[Math.floor(Math.random()*documents.length)];
+    const nextSlide = <SliderTunnelImage doc={document} />
+    this.setState({slides: [...this.state.slides, nextSlide]})
+  }
 }
 
 const wrapperStyle = {
-  perspective: 1000,
+  perspective: 12000,
   position: 'fixed',
   top: 0,
   bottom: 0,

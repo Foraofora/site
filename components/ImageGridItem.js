@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from './Link'
+import Link from '~/components/base/Link'
 
 export default class ImageGridItem extends React.Component {
   render() {

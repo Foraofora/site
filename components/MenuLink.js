@@ -11,14 +11,14 @@ export default class MenuLink extends React.Component {
       <a href='#'  style={menuTextStyle} {...this.props}>{this.props.children}</a>
     )
     return (
-      <Link {...this.props} prefetch><a style={menuTextStyle}>{this.props.children}</a></Link>
+      <Link {...this.props} prefetch><a style={{...menuTextStyle, ...this.props.style}}>{this.props.children}</a></Link>
     )
   }
 
   render() {
     return (
       <span
-        style={{position: 'relative'}}
+        style={{position: 'relative', zIndex: 1, marginRight: 20}}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -42,16 +42,15 @@ const menuTextStyle = {
   fontFamily: "'Source Serif Pro', serif",
   fontWeight: 600,
   fontSize: 40,
-  padding: 10,
-  color: 'black',
+  color: 'inherit',
   textDecoration: 'none'
 }
 
 const underlineStyle = {
   borderBottom: '10px solid rgb(0,17,254)',
   position: 'absolute',
-  bottom: -5,
-  left: 10,
-  right: 20,
+  bottom: '5%',
+  left: '0',
+  right: '1%',
   zIndex: -1
 }

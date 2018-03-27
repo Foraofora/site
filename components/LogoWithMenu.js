@@ -1,5 +1,4 @@
 import React from 'react'
-import Head from './Head'
 import Menu from './Menu'
 import Logo from './Logo'
 
@@ -11,7 +10,6 @@ export default class LogoWithMenu extends React.Component {
   render() {
     return (
       <div>
-        <Head />
         <div style={wrapperStyle}>
           <Logo {...this.props} onClick={this.toggleMenu} />
           {!this.state.menuVisible && <span style={textStyle}>{this.props.slogan}</span> }

@@ -1,14 +1,16 @@
 import React from 'react'
 import Prismic from 'prismic-javascript'
-import LogoWithMenu from '../../components/LogoWithMenu'
-import PageWrapper from '../../components/PageWrapper'
-import Title from '../../components/Title'
-import FloatingTitle from '../../components/FloatingTitle'
-import Image from '../../components/Image'
-import P from '../../components/Paragraph'
-import AuthorTeaser from '../../components/AuthorTeaser'
+import ContentWrapper from '~/components/struct/ContentWrapper'
+import PageWrapper from '~/components/struct/PageWrapper'
+import Image from '~/components/base/Image'
+import P from '~/components/base/Paragraph'
+import Quote from '~/components/base/Quote'
+import LogoWithMenu from '~/components/LogoWithMenu'
+import Title from '~/components/Title'
+import FloatingTitle from '~/components/FloatingTitle'
+import AuthorTeaser from '~/components/AuthorTeaser'
 
-export default class Index extends React.Component {
+export default class Article extends React.Component {
 
   static async getInitialProps({ req, query }) {
     const api = await Prismic.api("https://fora.prismic.io/api/v2")
@@ -21,13 +23,11 @@ export default class Index extends React.Component {
     const title = document.data.title[0].text
     const { author } = document.data
     const authorName = document.data.author.data && document.data.author.data.name[0].text
-    const bio = document.data.author.data && document.data.author.data.bio[0].text
+    const bio = document.data.author.data && document.data.author.data.bio && document.data.author.data.bio[0].text
 
     return (
-      <div style={{background: '#DFDFDF'}}>
-        <LogoWithMenu/>
-
-        <PageWrapper style={{...coverWrapperStyle, backgroundImage: `url(${document.data.cover.url})`}}>
+      <PageWrapper style={{background: '#DFDFDF'}}>
+        <ContentWrapper style={{...coverWrapperStyle, backgroundImage: `url(${document.data.cover.url})`}}>
           <Title>/Ações & Imaginações /Arte</Title>
           <div>
             <h1 style={h1Style}>{ title }</h1>
@@ -39,16 +39,27 @@ export default class Index extends React.Component {
           </div>
 
           <P style={teaserStyle}>{ document.data.teaser }</P>
-        </PageWrapper>
+        </ContentWrapper>
 
-        <PageWrapper style={{marginTop: 50, position: 'relative'}}>
+        <ContentWrapper style={{marginTop: 50, position: 'relative'}}>
           <FloatingTitle author={authorName} title={title} />
-          <P style={bodyStyle}>{ document.data.body[0].primary.text }</P>
+          {this.renderBody()}
           <AuthorTeaser author={author} style={{marginTop: 80}} />
-        </PageWrapper>
-
-      </div>
+        </ContentWrapper>
+      </PageWrapper>
     )
+  }
+
+  renderBody = () => {
+    const { document } = this.props
+    return document.data.body.map(slice => {
+      if (slice.slice_type == 'text') return (
+        <P style={bodyStyle}>{ slice.primary.text }</P>
+      )
+      if (slice.slice_type == 'quote') return (
+        <Quote {...slice.primary} />
+      )
+    })
   }
 }
 
