@@ -11,12 +11,12 @@ export default class CustomLink extends React.Component {
       <a href='#'  style={{...LinkStyle, ...this.props.style}} {...this.props}>{this.props.children}</a>
     )
     return (
-      <Link {...this.props}><a style={{...LinkStyle, ...this.props.style}}>{this.props.children}</a></Link>
+      <Link href={this.props.href}><a style={{...LinkStyle, ...this.props.style}}>{this.props.children}</a></Link>
     )
   }
 }
 
 const LinkStyle = {
-  color: 'black',
+  color: 'inherit',
   textDecoration: 'none'
 }

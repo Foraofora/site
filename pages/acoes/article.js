@@ -4,6 +4,7 @@ import ContentWrapper from '~/components/struct/ContentWrapper'
 import PageWrapper from '~/components/struct/PageWrapper'
 import Image from '~/components/base/Image'
 import P from '~/components/base/Paragraph'
+import Link from '~/components/base/Link'
 import Quote from '~/components/base/Quote'
 import LogoWithMenu from '~/components/LogoWithMenu'
 import Title from '~/components/Title'
@@ -14,26 +15,28 @@ export default class Article extends React.Component {
 
   static async getInitialProps({ req, query }) {
     const api = await Prismic.api("https://fora.prismic.io/api/v2")
-    const document = await api.getByID(query.id, {'fetchLinks': ['author.name', 'author.bio', 'author.photo']})
+    const document = await api.getByID(query.id, {'fetchLinks': ['author.name', 'author.bio', 'author.photo', 'category.name']})
     return { document }
   }
 
   render() {
     const { document } = this.props
     const title = document.data.title[0].text
-    const { author } = document.data
-    const authorName = document.data.author.data && document.data.author.data.name[0].text
-    const bio = document.data.author.data && document.data.author.data.bio && document.data.author.data.bio[0].text
-
+    const { author, category } = document.data
+    const authorName = author.data && author.data.name[0].text
+    const categoryName = category.data ? category.data.name[0].text : false
+    console.log(category)
     return (
       <PageWrapper style={{background: '#DFDFDF'}}>
         <ContentWrapper style={{...coverWrapperStyle, backgroundImage: `url(${document.data.cover.url})`}}>
-          <Title>/Ações & Imaginações /Arte</Title>
+          <Title>
+            <Link href={{pathname: '/acoes'}}>/Ações & Imaginações</Link> /{categoryName}
+          </Title>
           <div>
             <h1 style={h1Style}>{ title }</h1>
-            <div style={h1Style}>-</div>
+            { authorName && <div style={h1Style}>-</div> }
             <div style={coverBotStyle}>
-              <p style={authorStyle}>{ 'Por '+authorName }</p>
+              <p style={authorStyle}>{ authorName && 'Por '+authorName }</p>
               <p style={dateStyle}>{ /*document.last_publication_date*/"18.02.18" }</p>
             </div>
           </div>
@@ -85,7 +88,7 @@ const h1Style = {
   alignSelf: 'flex-end',
   marginBottom: 0,
   fontSize: 41,
-  fontWeight: 'normal',
+  fontWeight: 600
 }
 
 const authorStyle = {
@@ -107,5 +110,4 @@ const teaserStyle = {
 
 const bodyStyle = {
   fontFamily: "'Source Sans Pro', sans-serif",
-  fontSize: 16
 }

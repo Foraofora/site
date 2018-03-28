@@ -18,7 +18,8 @@ export default class Footer extends React.Component {
 const contactTextStyle = {
   fontSize: 26,
   fontFamily: "'Source Serif Pro', serif",
-  fontWeight: 600
+  fontWeight: 600,
+  marginTop: 60
 }
 
 const linkStyle = {

@@ -21,7 +21,7 @@ export default class Paragraph extends React.Component {
 }
 
 const baseStyle = {
-  fontSize: 20,
+  fontSize: 18,
   paddingLeft: 200,
   paddingRight: 200,
   maxWidth: 660,

@@ -1,29 +1,25 @@
 import React from 'react'
-import Link from 'next/link'
+import Router from 'next/router'
+import Link from '~/components/base/Link'
 
 export default class MenuLink extends React.Component {
   state = {
     hover: false
   }
 
-  renderLink = () => {
-    if (this.props.onClick) return (
-      <a href='#'  style={menuTextStyle} {...this.props}>{this.props.children}</a>
-    )
-    return (
-      <Link {...this.props} prefetch><a style={{...menuTextStyle, ...this.props.style}}>{this.props.children}</a></Link>
-    )
-  }
-
   render() {
+    const style = {
+      position: 'relative',
+      marginRight: 15
+    }
     return (
       <span
-        style={{position: 'relative', zIndex: 1, marginRight: 20}}
+        style={style}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
         <span style={this.state.hover ? underlineStyle : {}} />
-        {this.renderLink()}
+        <Link {...this.props} style={{...menuTextStyle, ...this.props.style}} />
       </span>
     )
   }
@@ -43,7 +39,8 @@ const menuTextStyle = {
   fontWeight: 600,
   fontSize: 40,
   color: 'inherit',
-  textDecoration: 'none'
+  textDecoration: 'none',
+  position: 'relative'
 }
 
 const underlineStyle = {
@@ -52,5 +49,4 @@ const underlineStyle = {
   bottom: '5%',
   left: '0',
   right: '1%',
-  zIndex: -1
 }

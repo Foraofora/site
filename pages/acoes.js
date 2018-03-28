@@ -1,10 +1,11 @@
 import React from 'react'
-import { getAcoes } from '../lib/backend'
-import PageWrapper from '../components/struct/PageWrapper'
-import ContentWrapper from '../components/struct/ContentWrapper'
-import Title from '../components/Title'
-import CategorySelector from '../components/CategorySelector'
-import ImageGrid from '../components/ImageGrid'
+import { getAcoes, getTags } from '~/lib/backend'
+import PageWrapper from '~/components/struct/PageWrapper'
+import ContentWrapper from '~/components/struct/ContentWrapper'
+import Title from '~/components/Title'
+import CategorySelector from '~/components/CategorySelector'
+import ImageGrid from '~/components/ImageGrid'
+import Link from '~/components/base/Link'
 
 export default class pageAcoes extends React.Component {
 
@@ -23,12 +24,20 @@ export default class pageAcoes extends React.Component {
     return (
       <PageWrapper style={{background: '#DFDFDF'}}>
         <ContentWrapper>
-          <Title>/Ações & Imaginações</Title>
-          <CategorySelector
-            categories={categories}
-            selected={selectedCategory}
-            onClick={this.handleCategorySelection}
-          />
+          <div style={filtersWrapperStyle}>
+            <Title>/Ações & Imaginações</Title>
+            <Link href={{pathname: '/acoes/tags'}}>Palavras-chave;</Link>
+          </div>
+          <div style={filtersWrapperStyle}>
+            <CategorySelector
+              categories={categories}
+              selected={selectedCategory}
+              onClick={this.handleCategorySelection}
+            />
+            <span>Participante;</span>
+          </div>
+
+
           <ImageGrid items={documents} category={selectedCategory} />
         </ContentWrapper>
       </PageWrapper>
@@ -38,4 +47,12 @@ export default class pageAcoes extends React.Component {
   handleCategorySelection = (category) => {
     this.setState({selectedCategory: category})
   }
+}
+
+const filtersWrapperStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  fontFamily: "'Source Serif Pro', serif",
+  fontWeight: 600,
+  fontSize: 41
 }

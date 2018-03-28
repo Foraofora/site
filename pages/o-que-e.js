@@ -1,12 +1,12 @@
 import React from 'react'
 import Prismic from 'prismic-javascript'
-import LogoWithMenu from '../components/LogoWithMenu'
-import ContentWrapper from '../components/ContentWrapper'
-import Title from '../components/Title'
-import P from '../components/Paragraph'
-import Img from '../components/Image'
+import LogoWithMenu from '~/components/LogoWithMenu'
+import ContentWrapper from '~/components/struct/ContentWrapper'
+import Title from '~/components/Title'
+import P from '~/components/base/Paragraph'
+import Img from '~/components/base/Image'
 
-export default class Index extends React.Component {
+export default class Oquee extends React.Component {
 
   static async getInitialProps({ req }) {
     const api = await Prismic.api("https://fora.prismic.io/api/v2")

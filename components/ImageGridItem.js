@@ -17,7 +17,7 @@ export default class ImageGridItem extends React.Component {
             {this.renderPhotos()}
           </div>
           <h3 style={titleStyle}>
-            {title}<br/>-<br/>{author}
+            {title}{author && <span style={{fontWeight: 400}}><br/>-<br/>{author}</span>}
           </h3>
         </Link>
       </div>

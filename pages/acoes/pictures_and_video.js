@@ -9,6 +9,7 @@ import AuthorTeaser from '~/components/AuthorTeaser'
 import TagsTeaser from '~/components/TagsTeaser'
 import Image from '~/components/base/Image'
 import P from '~/components/base/Paragraph'
+import Link from '~/components/base/Link'
 
 export default class Index extends React.Component {
 
@@ -23,10 +24,14 @@ export default class Index extends React.Component {
     const { author } = document.data
     const authorName = author.data && author.data.name[0].text
     const title = document.data.title[0].text
+    const category = document.data.category.data ? document.data.category.data.name[0].text : false
+
     return (
       <PageWrapper invert style={{background: '#000', color: 'white', fontFamily: "'Source Serif Pro', serif"}}>
         <ContentWrapper style={coverWrapperStyle}>
-          <Title>/Ações & Imaginações /Arte</Title>
+          <Title>
+            <Link href={{pathname: '/acoes'}}>/Ações & Imaginações</Link> /{category}
+          </Title>
           <div style={coverMidStyle}>
             <h1 style={h1Style}>{ document.data.title[0].text }</h1>
             <div style={imageWrapperStyle}>
@@ -35,7 +40,7 @@ export default class Index extends React.Component {
           </div>
           <div style={coverBotStyle}>
             <p style={dateStyle} />
-            <p style={authorStyle}>{ 'Por '+authorName }</p>
+            <p style={authorStyle}>{ authorName && 'Por '+authorName }</p>
             <p style={dateStyle}>{ /*document.last_publication_date*/"18.02.18" }</p>
           </div>
         </ContentWrapper>
@@ -93,7 +98,8 @@ const h1Style = {
   fontSize: 41,
   fontWeight: 'normal',
   marginBottom: -8,
-  maxWidth: 480
+  maxWidth: 480,
+  fontWeight: 600
 }
 
 const authorStyle = {
@@ -112,5 +118,4 @@ const dateStyle = {
 
 const bodyStyle = {
   fontFamily: "'Source Sans Pro', sans-serif",
-  fontSize: 16
 }

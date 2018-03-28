@@ -14,13 +14,10 @@ export default class CustomHead extends React.Component {
   render() {
     return (
       <Head>
-        <link rel='stylesheet' type='text/css' href='/static/nprogress.css' />
+        <link rel='stylesheet' type='text/css' href='/static/main.css' />
+        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/interval" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro" rel="stylesheet" />
-        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/interval" type="text/css"/>
-        <style dangerouslySetInnerHTML={{__html: `
-          body { margin: 0 }
-        `}} />
       </Head>
     )
   }

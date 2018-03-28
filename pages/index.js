@@ -1,8 +1,8 @@
 import React from 'react'
 import Prismic from 'prismic-javascript'
 
-import LogoWithMenu from '../components/LogoWithMenu'
-import SliderTunnel from '../components/SliderTunnel'
+import LogoWithMenu from '~/components/LogoWithMenu'
+import SliderTunnel from '~/components/SliderTunnel'
 
 export default class Index extends React.Component {
 

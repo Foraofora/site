@@ -24,10 +24,10 @@ export default class Menu extends React.Component {
           <MenuLink onClick={toggleSignup} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave}>Boletim Informativo;</MenuLink>
         </div>
         <div style={socialMenuWrapperStyle}>
-          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='fb'>Fb;</MenuLink>
-          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='tw'>Tw;</MenuLink>
-          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='ig'>Ig;</MenuLink>
-          <MenuLink href="http://facebook.com" onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='yt'>Yt;</MenuLink>
+          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='fb'>Fb;</MenuLink>
+          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='tw'>Tw;</MenuLink>
+          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='ig'>Ig;</MenuLink>
+          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='yt'>Yt;</MenuLink>
         </div>
         <Modal visible={showSignup} onBgClick={this.toggleSignup}>
           <SignupForm />
@@ -66,7 +66,7 @@ const menuTextStyle = {
 
 const mainMenuWrapperStyle = {
   position: 'fixed',
-  left: 165,
+  left: 175,
   top: 21
 }
 
