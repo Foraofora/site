@@ -1,9 +1,10 @@
-import React from 'react'
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
+import { DesktopOnly } from '~/components/struct/Media';
 
 export default class FloatingTitle extends React.Component {
   state = {
-    topOffset: 0
+    topOffset: 0,
   }
 
   componentDidMount() {
@@ -11,28 +12,29 @@ export default class FloatingTitle extends React.Component {
   }
 
   componentWillUnmount() {
-      window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   render() {
-    const { topOffset } = this.state
+    const { topOffset } = this.state;
     return (
-      <div ref="Wrapper" style={{position: 'relative'}}>
-        <div style={{...wrapperStyle, transform: `rotateZ(-90deg) translate3d(-${topOffset}px, 0, 0)`}}>
-          <div style={titleStyle}>{ this.props.title }</div>
-          <div>{ this.props.author }</div>
+      <div ref="Wrapper" style={{ position: 'relative' }}>
+        <div style={{ ...wrapperStyle, transform: `rotateZ(-90deg) translate3d(-${topOffset}px, 0, 0)` }}>
+          <DesktopOnly>
+            <div style={titleStyle}>{ this.props.title }</div>
+            <div>{ this.props.author }</div>
+          </DesktopOnly>
         </div>
       </div>
-    )
+    );
   }
 
   handleScroll = () => {
-    const viewportOffset = this.refs.Wrapper.getBoundingClientRect()
-    const spaceBelow = window.innerHeight - viewportOffset.bottom
-    const distanceBottom = window.innerHeight/2+130
-    if (spaceBelow < distanceBottom) return
-    this.setState({topOffset: spaceBelow-distanceBottom})
-
+    const viewportOffset = this.refs.Wrapper.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - viewportOffset.bottom;
+    const distanceBottom = window.innerHeight / 2 + 130;
+    if (spaceBelow < distanceBottom) return;
+    this.setState({ topOffset: spaceBelow - distanceBottom });
   }
 }
 
@@ -40,12 +42,14 @@ const wrapperStyle = {
   textAlign: 'center',
   fontFamily: 'IntervalBook, monospace',
   fontSize: 16,
-  maxWidth: 260,
+  width: 260,
   top: 130,
+  left: -60,
   position: 'absolute',
-}
+  pointerEvents: 'none',
+};
 
 const titleStyle = {
   marginBottom: 5,
   fontFamily: 'IntervalSlanted, monospace',
-}
+};

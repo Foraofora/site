@@ -1,16 +1,16 @@
-import React from 'react'
-import Router from 'next/router'
-import Menu from '~/components/Menu'
-import Logo from '~/components/Logo'
-import { withRouter } from 'next/router'
+import React from 'react';
+import Router from 'next/router';
+import Menu from '~/components/Menu';
+import Logo from '~/components/Logo';
+import { withRouter } from 'next/router';
 
 class LogoWithMenu extends React.Component {
   state = {
-    menuVisible: false
+    menuVisible: false,
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({menuVisible: false})
+    this.setState({ menuVisible: false });
   }
 
   render() {
@@ -20,16 +20,16 @@ class LogoWithMenu extends React.Component {
           <Logo {...this.props} onClick={this.handleLogoClick} />
           {!this.state.menuVisible && <span style={textStyle}>{this.props.slogan}</span>}
         </div>
-        <Menu visible={this.state.menuVisible} onBgClick={this.toggleMenu}/>
+        <Menu visible={this.state.menuVisible} onBgClick={this.toggleMenu} />
       </div>
-    )
+    );
   }
 
-  handleLogoClick = e => {
-    if (this.state.menuVisible && Router.pathname !== '/') return Router.push('/')
-    this.toggleMenu()
+  handleLogoClick = (e) => {
+    if (this.state.menuVisible && Router.pathname !== '/') return Router.push('/');
+    this.toggleMenu();
   }
-  toggleMenu = () => this.setState({menuVisible: !this.state.menuVisible})
+  toggleMenu = () => this.setState({ menuVisible: !this.state.menuVisible })
 }
 
 const wrapperStyle = {
@@ -37,14 +37,14 @@ const wrapperStyle = {
   zIndex: 2,
   top: 17,
   left: 29,
-  maxWidth: 750
-}
+  maxWidth: 750,
+};
 
 const textStyle = {
   fontFamily: "'Source Serif Pro', serif",
   fontWeight: 600,
   fontSize: 40,
-  padding: 10
-}
+  padding: 10,
+};
 
-export default withRouter(LogoWithMenu)
+export default withRouter(LogoWithMenu);

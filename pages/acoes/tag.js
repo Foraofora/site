@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAcoes } from '~/lib/backend';
+import { getByTag } from '~/lib/backend';
 import PageWrapper from '~/components/struct/PageWrapper';
 import ContentWrapper from '~/components/struct/ContentWrapper';
 import Title from '~/components/Title';
@@ -8,34 +8,21 @@ import ImageGrid from '~/components/ImageGrid';
 import Link from '~/components/base/Link';
 
 export default class pageAcoes extends React.Component {
-  static async getInitialProps({ req }) {
-    const { documents, categories } = await getAcoes();
-    return { documents, categories };
-  }
-
-  state = {
-    selectedCategory: false,
+  static async getInitialProps({ req, query }) {
+    const { tag } = query;
+    const { documents } = await getByTag(tag);
+    return { documents, tag };
   }
 
   render() {
-    const { documents, categories } = this.props;
-    const { selectedCategory } = this.state;
+    const { documents, tag } = this.props;
     return (
       <PageWrapper style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
           <div style={filtersWrapperStyle}>
-            <Title>/Ações & Imaginações</Title>
-            <Link href={{ pathname: '/acoes/tags' }}>Palavras-chave;</Link>
+            <Title><Link href={{ pathname: '/acoes/tags' }}>/Palavras-chave</Link> /{tag}</Title>
           </div>
-          <div style={filtersWrapperStyle}>
-            <CategorySelector
-              categories={categories}
-              selected={selectedCategory}
-              onClick={this.handleCategorySelection}
-            />
-            <span>Participante;</span>
-          </div>
-          <ImageGrid items={documents} category={selectedCategory} />
+          <ImageGrid items={documents} />
         </ContentWrapper>
       </PageWrapper>
     );

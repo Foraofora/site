@@ -1,39 +1,33 @@
-import React from 'react'
-import { getTags } from '~/lib/backend'
-import PageWrapper from '~/components/struct/PageWrapper'
-import ContentWrapper from '~/components/struct/ContentWrapper'
-import Title from '~/components/Title'
-import Link from '~/components/base/Link'
+import React from 'react';
+import { getTags } from '~/lib/backend';
+import PageWrapper from '~/components/struct/PageWrapper';
+import ContentWrapper from '~/components/struct/ContentWrapper';
+import Title from '~/components/Title';
+import MenuLink from '~/components/MenuLink';
 
 export default class pageTags extends React.Component {
-
-  static async getInitialProps({ req }) {
-    return await getTags()
-  }
-
-  state = {
-    selectedCategory: false
-  }
-
-  render() {
-    const { tags } = this.props
-    const { selectedCategory } = this.state
-    return (
-      <PageWrapper style={{background: '#DFDFDF'}}>
-        <ContentWrapper>
-          <Title>
-            <Link href={{pathname: '/acoes'}}>/Ações & Imaginações</Link> /Palavras-chave
-          </Title>
-          <div style={tagsWrapperStyle}>
-            {tags.map(tag => <span style={tagsStyle}>{tag};</span>)}
-          </div>
-        </ContentWrapper>
-      </PageWrapper>
-    )
+  static async getInitialProps() {
+    return getTags();
   }
 
   handleCategorySelection = (category) => {
-    this.setState({selectedCategory: category})
+    this.setState({ selectedCategory: category });
+  }
+
+  render() {
+    const { tags } = this.props;
+    return (
+      <PageWrapper style={{ background: '#DFDFDF' }}>
+        <ContentWrapper>
+          <Title>
+            <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /Palavras-chave
+          </Title>
+          <div style={tagsWrapperStyle}>
+            {tags.map(tag => <div style={tagsStyle}><MenuLink href={{ pathname: '/acoes/tag', query: { tag } }}>{tag};</MenuLink></div>)}
+          </div>
+        </ContentWrapper>
+      </PageWrapper>
+    );
   }
 }
 
@@ -44,9 +38,9 @@ const tagsWrapperStyle = {
   fontWeight: 600,
   fontSize: 41,
   flexWrap: 'wrap',
-  marginTop: 50
-}
+  margin: '50px 60px',
+};
 
 const tagsStyle = {
   width: '50%',
-}
+};

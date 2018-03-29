@@ -1,24 +1,23 @@
-import React from 'react'
-import CategorySelectorItem from './CategorySelectorItem'
+import React from 'react';
+import CategorySelectorItem from './CategorySelectorItem';
 
 export default class CategorySelector extends React.Component {
-
   state = {
-    selected: null
+    selected: null,
   }
   render() {
     return (
       <div style={wrapperStyle}>
         {this.renderItems()}
       </div>
-    )
+    );
   }
 
   renderItems = () => {
-    const { categories, selected, onClick } = this.props
-    return categories.map((category)=>{
-      const name = category.data.name[0].text
-      const isSelected = selected == name ? true : false
+    const { categories, selected, onClick } = this.props;
+    return categories.map((category) => {
+      const name = category.data.name[0].text;
+      const isSelected = selected == name;
       return (
         <CategorySelectorItem
           name={category.data.name[0].text}
@@ -26,8 +25,8 @@ export default class CategorySelector extends React.Component {
           onClick={onClick}
           selected={isSelected}
         />
-      )
-    })
+      );
+    });
   }
 }
 
@@ -37,5 +36,5 @@ const wrapperStyle = {
   fontFamily: "'Source Serif Pro', serif",
   fontWeight: 600,
   fontSize: 41,
-  marginBottom: 20
-}
+  marginBottom: 20,
+};
