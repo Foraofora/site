@@ -1,25 +1,25 @@
-import React from 'react';
-import { getAcoes } from '~/lib/backend';
-import PageWrapper from '~/components/struct/PageWrapper';
-import ContentWrapper from '~/components/struct/ContentWrapper';
-import Title from '~/components/Title';
-import CategorySelector from '~/components/CategorySelector';
-import ImageGrid from '~/components/ImageGrid';
-import Link from '~/components/base/Link';
+import React from 'react'
+import { getAcoes } from '~/lib/backend'
+import PageWrapper from '~/components/struct/PageWrapper'
+import ContentWrapper from '~/components/struct/ContentWrapper'
+import Title from '~/components/Title'
+import CategorySelector from '~/components/CategorySelector'
+import ImageGrid from '~/components/ImageGrid'
+import Link from '~/components/MenuLink'
 
 export default class pageAcoes extends React.Component {
-  static async getInitialProps({ req }) {
-    const { documents, categories } = await getAcoes();
-    return { documents, categories };
+  static async getInitialProps ({ req }) {
+    const { documents, categories } = await getAcoes()
+    return { documents, categories }
   }
 
   state = {
-    selectedCategory: false,
+    selectedCategory: false
   }
 
-  render() {
-    const { documents, categories } = this.props;
-    const { selectedCategory } = this.state;
+  render () {
+    const { documents, categories } = this.props
+    const { selectedCategory } = this.state
     return (
       <PageWrapper style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
@@ -33,16 +33,16 @@ export default class pageAcoes extends React.Component {
               selected={selectedCategory}
               onClick={this.handleCategorySelection}
             />
-            <span>Participante;</span>
+            <Link href={{ pathname: '/acoes/authors' }}>Participantes;</Link>
           </div>
           <ImageGrid items={documents} category={selectedCategory} />
         </ContentWrapper>
       </PageWrapper>
-    );
+    )
   }
 
   handleCategorySelection = (category) => {
-    this.setState({ selectedCategory: category });
+    this.setState({ selectedCategory: category })
   }
 }
 
@@ -51,5 +51,5 @@ const filtersWrapperStyle = {
   justifyContent: 'space-between',
   fontFamily: "'Source Serif Pro', serif",
   fontWeight: 600,
-  fontSize: 41,
-};
+  fontSize: 41
+}

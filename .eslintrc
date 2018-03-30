@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": ["standard", "standard-react"],
   "globals": {
     "document": true,
     "window": true,

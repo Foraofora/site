@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-import ImageGridItem from './ImageGridItem';
+import ImageGridItem from './ImageGridItem'
 
 export default class ImageGrid extends React.Component {
-  render() {
-    if (!this.props.items) return null;
+  render () {
+    if (!this.props.items) return null
     return (
       <div style={wrapperStyle}>
         {this.renderItems()}
@@ -12,16 +12,16 @@ export default class ImageGrid extends React.Component {
         <div style={{ width: 200, margin: '0 4%' }} />
         <div style={{ width: 200, margin: '0 4%' }} />
       </div>
-    );
+    )
   }
 
   renderItems = () => this.props.items.map((item) => {
     if (!this.props.category) {
-      return <ImageGridItem {...item} />;
+      return <ImageGridItem {...item} />
     }
-    if (!item.data.category.data) return false;
+    if (!item.data.category.data) return false
     if (this.props.category == item.data.category.data.name[0].text) {
-      return <ImageGridItem {...item} />;
+      return <ImageGridItem {...item} />
     }
   })
 }
@@ -30,6 +30,6 @@ const wrapperStyle = {
   display: 'flex',
   justifyContent: 'space-between',
   margin: '50px -46px 0',
-  flexWrap: 'wrap',
+  flexWrap: 'wrap'
 
-};
+}

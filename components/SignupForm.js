@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
 export default class SignupForm extends React.Component {
-  render() {
+  render () {
     return (
       <div style={wrapperStyle}>
         <div>
           <p style={textStyle}>Digite seu e-mail e pressione Enter para receber o Boletim informativo FORA diretamente em sua caixa de e-emails.</p>
-          <input type="text" style={inputStyle} />
+          <input type='text' style={inputStyle} />
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -23,15 +23,15 @@ const wrapperStyle = {
   minWidth: 200,
   maxWidth: 800,
   transform: 'translateX(-50%)',
-  color: 'blue',
-};
+  color: 'blue'
+}
 
 const textStyle = {
   maxWidth: 420,
   fontFamily: 'monospace',
   fontSize: 14,
-  paddingLeft: 7,
-};
+  paddingLeft: 7
+}
 
 const inputStyle = {
   borderWidth: 12,
@@ -47,5 +47,5 @@ const inputStyle = {
   fontSize: 42,
   fontWeight: 600,
   fontFamily: "'Source Serif Pro', serif",
-  outline: 'none',
-};
+  outline: 'none'
+}

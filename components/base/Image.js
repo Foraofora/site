@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 export const SimpleImage = props => (
   <img {...props} style={{ ...baseStyle, ...props.style }} />
-);
+)
 
 export const LazyImage = (props) => {
-  const { dimensions, url, style } = props;
+  const { dimensions, url, style } = props
   return (
     <img
       {...props}
@@ -14,17 +14,16 @@ export const LazyImage = (props) => {
       height={dimensions.height}
       style={{ ...baseStyle, ...style }}
     />
-  );
-};
+  )
+}
 
-export const Image = props => (props.dimensions ?
-  <LazyImage {...props} /> : <SimpleImage {...props} />);
-
+export const Image = props => (props.dimensions
+  ? <LazyImage {...props} /> : <SimpleImage {...props} />)
 
 const baseStyle = {
   maxWidth: '100%',
   maxHeight: '100%',
-  flex: 0,
-};
+  flex: 0
+}
 
-export default Image;
+export default Image

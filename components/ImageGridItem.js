@@ -1,14 +1,14 @@
-import React from 'react';
-import Link from '~/components/base/Link';
+import React from 'react'
+import Link from '~/components/base/Link'
 
 export default class ImageGridItem extends React.Component {
-  render() {
-    const { data, type, id } = this.props;
-    console.log(this.props);
-    const title = data.title instanceof Array ? data.title[0].text : false;
-    const author = data.author.data ? data.author.data.name[0].text : false;
-    const category = this.props.data.category.data ? this.props.data.category.data.name[0].text : false;
-    const date = this.props.last_publication_date;
+  render () {
+    const { data, type, id } = this.props
+    console.log(this.props)
+    const title = data.title instanceof Array ? data.title[0].text : false
+    const author = data.author.data ? data.author.data.name[0].text : false
+    const category = this.props.data.category.data ? this.props.data.category.data.name[0].text : false
+    const date = this.props.last_publication_date
 
     return (
       <div style={wrapperStyle}>
@@ -22,11 +22,11 @@ export default class ImageGridItem extends React.Component {
           </h3>
         </Link>
       </div>
-    );
+    )
   }
 
   renderPhotos = () => {
-    const photos = this.props.data.photos || this.props.data.cover;
+    const photos = this.props.data.photos || this.props.data.cover
 
     if (photos.length) {
       return (
@@ -38,25 +38,25 @@ export default class ImageGridItem extends React.Component {
             <img src={photos[1].photo.thumb.url} style={imageStyle} />
           </div>}
         </div>
-      );
+      )
     }
-    return <div style={imageWrapperStyle}><img src={photos.url} style={imageStyle} /></div>;
+    return <div style={imageWrapperStyle}><img src={photos.url} style={imageStyle} /></div>
   }
 }
 
 const wrapperStyle = {
   width: 200,
-  margin: '0 4%',
-};
+  margin: '0 4%'
+}
 const headerStyle = {
   fontFamily: 'IntervalBook, monospace',
-  fontSize: 12,
-};
+  fontSize: 12
+}
 const imageStackStyle = {
   width: 200,
   height: 200,
-  position: 'relative',
-};
+  position: 'relative'
+}
 const imageWrapperStyle = {
   position: 'absolute',
   left: 0,
@@ -65,16 +65,16 @@ const imageWrapperStyle = {
   bottom: 0,
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center',
-};
+  alignItems: 'center'
+}
 const imageStyle = {
   maxWidth: '100%',
-  maxHeight: '100%',
-};
+  maxHeight: '100%'
+}
 const titleStyle = {
   textAlign: 'center',
   fontFamily: "'Source Serif Pro', serif",
   fontSize: 26,
   fontWeight: 600,
-  marginTop: 20,
-};
+  marginTop: 20
+}

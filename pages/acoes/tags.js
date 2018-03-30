@@ -1,21 +1,17 @@
-import React from 'react';
-import { getTags } from '~/lib/backend';
-import PageWrapper from '~/components/struct/PageWrapper';
-import ContentWrapper from '~/components/struct/ContentWrapper';
-import Title from '~/components/Title';
-import MenuLink from '~/components/MenuLink';
+import React from 'react'
+import { getTags } from '~/lib/backend'
+import PageWrapper from '~/components/struct/PageWrapper'
+import ContentWrapper from '~/components/struct/ContentWrapper'
+import Title from '~/components/Title'
+import MenuLink from '~/components/MenuLink'
 
 export default class pageTags extends React.Component {
-  static async getInitialProps() {
-    return getTags();
+  static async getInitialProps () {
+    return getTags()
   }
 
-  handleCategorySelection = (category) => {
-    this.setState({ selectedCategory: category });
-  }
-
-  render() {
-    const { tags } = this.props;
+  render () {
+    const { tags } = this.props
     return (
       <PageWrapper style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
@@ -27,7 +23,7 @@ export default class pageTags extends React.Component {
           </div>
         </ContentWrapper>
       </PageWrapper>
-    );
+    )
   }
 }
 
@@ -38,9 +34,9 @@ const tagsWrapperStyle = {
   fontWeight: 600,
   fontSize: 41,
   flexWrap: 'wrap',
-  margin: '50px 60px',
-};
+  margin: '50px 60px'
+}
 
 const tagsStyle = {
-  width: '50%',
-};
+  width: '50%'
+}

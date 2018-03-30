@@ -1,53 +1,51 @@
-import React from 'react';
-import Router from 'next/router';
-import Link from '~/components/base/Link';
+import React from 'react'
+import Router from 'next/router'
+import Link from '~/components/base/Link'
 
 export default class MenuLink extends React.Component {
   state = {
-    hover: false,
+    hover: false
   }
 
   handleMouseEnter = () => {
-    this.props.onMouseEnter && this.props.onMouseEnter(this.props.menuKey);
-    this.setState({ hover: true });
+    this.props.onMouseEnter && this.props.onMouseEnter(this.props.menuKey)
+    this.setState({ hover: true })
   }
   handleMouseLeave = () => {
-    this.props.onMouseLeave && this.props.onMouseLeave(this.props.menuKey);
-    this.setState({ hover: false });
+    this.props.onMouseLeave && this.props.onMouseLeave(this.props.menuKey)
+    this.setState({ hover: false })
   }
 
-  render() {
+  render () {
     return (
       <span
-        style={wrapperStyle}
+        style={{ ...wrapperStyle, ...this.props.style }}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
         <span style={this.state.hover ? underlineStyle : {}} />
-        <Link {...this.props} style={{ ...menuTextStyle, ...this.props.style }} />
+        <Link {...this.props} style={menuTextStyle} />
       </span>
-    );
+    )
   }
 }
 const wrapperStyle = {
   position: 'relative',
   marginRight: 15,
-  display: 'inline-block'
+  display: 'inline-block',
+  fontFamily: "'Source Serif Pro', serif",
+  fontWeight: 600
 }
 const menuTextStyle = {
-  fontFamily: "'Source Serif Pro', serif",
-  fontWeight: 600,
-  fontSize: 40,
   color: 'inherit',
   textDecoration: 'none',
-  position: 'relative',
-  height: '1em',
-};
+  position: 'relative'
+}
 
 const underlineStyle = {
-  borderBottom: '10px solid rgb(0,17,254)',
+  borderBottom: '0.25em solid rgb(0,17,254)',
   position: 'absolute',
-  bottom: '7%',
+  bottom: '0.13em',
   left: '0',
-  right: '-1%',
-};
+  right: '-1%'
+}

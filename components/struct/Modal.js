@@ -1,23 +1,23 @@
-import React from 'react';
+import React from 'react'
 
 export default class MenuModal extends React.Component {
-  render() {
-    const { visible, children } = this.props;
+  render () {
+    const { visible, children } = this.props
     return (
       <div
-        className="modal"
+        className='modal'
         style={visible ? { ...showStyle, ...this.props.style } : { ...hideStyle, ...this.props.style }}
         onClick={this._onBgClick}
       >
         {children}
       </div>
-    );
+    )
   }
 
   _onBgClick = (event) => {
-    if (!event.target.classList.contains('modal')) return;
-    this.props.onBgClick && this.props.onBgClick(event);
-    event.stopPropagation();
+    if (!event.target.classList.contains('modal')) return
+    this.props.onBgClick && this.props.onBgClick(event)
+    event.stopPropagation()
   }
 }
 
@@ -27,20 +27,20 @@ const baseStyle = {
   left: 0,
   right: 0,
   bottom: 0,
-  zIndex: 1,
-};
+  zIndex: 1
+}
 
 const hideStyle = {
   ...baseStyle,
   opacity: 0,
-  pointerEvents: 'none',
+  pointerEvents: 'none'
   // transform: 'translate3d(0,-100px,0px)',
   // transition: '0.3s all ease-in'
-};
+}
 
 const showStyle = {
   ...baseStyle,
-  opacity: 1,
+  opacity: 1
   // transform: 'translate3d(0,0,0px)',
   // transition: '0.7s all ease-out'
-};
+}

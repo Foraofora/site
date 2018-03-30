@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
 export default class ContentWrapper extends React.Component {
-  render() {
+  render () {
     return (
       <div style={{ ...wrapperStyle, ...this.props.style }}>
         {this.props.children}
       </div>
-    );
+    )
   }
 }
 
@@ -15,5 +15,5 @@ const wrapperStyle = {
   paddingLeft: 29,
   paddingRight: 29,
   paddingBottom: 21,
-  boxSizing: 'border-box',
-};
+  boxSizing: 'border-box'
+}

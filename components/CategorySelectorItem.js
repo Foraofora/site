@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
 export default class CategorySelectorItem extends React.Component {
   state = {
-    hover: false,
+    hover: false
   }
 
-  render() {
-    const { name } = this.props;
+  render () {
+    const { name } = this.props
     return (
       <a
-        href="#"
+        href='#'
         style={wrapperStyle}
         onMouseEnter={() => this.setState({ hover: true })}
         onMouseLeave={() => this.setState({ hover: false })}
@@ -18,18 +18,18 @@ export default class CategorySelectorItem extends React.Component {
         {name} (<span style={{ marginLeft: 22 }}>);</span>
         <span style={this.checkStyle()}>X</span>
       </a>
-    );
+    )
   }
 
   checkStyle = () => {
-    if (this.state.hover) return checkHoverStyle;
-    if (this.props.selected) return checkSelectedStyle;
-    return checkStyle;
+    if (this.state.hover) return checkHoverStyle
+    if (this.props.selected) return checkSelectedStyle
+    return checkStyle
   }
 
   handlePress = () => {
-    if (this.props.selected) return this.props.onClick(false);
-    this.props.onClick(this.props.name);
+    if (this.props.selected) return this.props.onClick(false)
+    this.props.onClick(this.props.name)
   }
 }
 
@@ -38,21 +38,21 @@ const wrapperStyle = {
   marginRight: 10,
   position: 'relative',
   textDecoration: 'none',
-  color: 'black',
-};
+  color: 'black'
+}
 
 const checkStyle = {
   position: 'absolute',
   right: 24,
-  opacity: 0,
-};
+  opacity: 0
+}
 const checkHoverStyle = {
   ...checkStyle,
   color: 'blue',
-  opacity: 1,
-};
+  opacity: 1
+}
 const checkSelectedStyle = {
   ...checkStyle,
   color: 'black',
-  opacity: 1,
-};
+  opacity: 1
+}

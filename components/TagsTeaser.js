@@ -1,10 +1,10 @@
-import React from 'react';
-import Link from '~/components/base/Link';
+import React from 'react'
+import Link from '~/components/base/Link'
 
 export default class CategoryTeaser extends React.Component {
-  render() {
-    const { tags } = this.props;
-    if (!tags.length) return false;
+  render () {
+    const { tags } = this.props
+    if (!tags.length) return false
     return (
       <div style={wrapperStyle}>
         <div>Tags</div>
@@ -15,12 +15,12 @@ export default class CategoryTeaser extends React.Component {
           </div>
         ))}
       </div>
-    );
+    )
   }
 }
 
 const wrapperStyle = {
   textAlign: 'right',
   fontFamily: 'IntervalBook, monospace',
-  fontSize: 12,
-};
+  fontSize: 12
+}
