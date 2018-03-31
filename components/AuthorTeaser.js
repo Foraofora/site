@@ -1,18 +1,20 @@
 import React from 'react'
 import P from '~/components/base/Paragraph'
 import Img from '~/components/base/Image'
+import {RichText} from 'prismic-reactjs'
 
 export default class AuthorTeaser extends React.Component {
   render () {
-    const { author } = this.props
+    const { author, style } = this.props
+
     if (!author.data) return false
-    const photo = author.data.photo ? author.data.photo.url : false,
-      bio = author.data.bio && author.data.bio[0].text
+    const photo = author.data.photo ? author.data.photo.url : false
+    const bio = author.data.bio
     return (
-      <P style={this.props.style}>
+      <P style={style}>
         <span style={wrapperStyle}>
           <Img style={imageStyle} src={photo} />
-          {bio}
+          {RichText.render(bio)}
         </span>
       </P>
     )

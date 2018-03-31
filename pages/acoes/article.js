@@ -13,7 +13,7 @@ import RelatedContentWrapper from '~/components/RelatedContentWrapper'
 export default class Article extends React.Component {
   static async getInitialProps ({ query }) {
     const api = await Prismic.api('https://fora.prismic.io/api/v2')
-    const doc = await api.getByID(query.id, { fetchLinks: ['author.name', 'author.bio', 'author.photo', 'category.name'] })
+    const doc = await api.getByID(query.id, { fetchLinks: ['author.name', 'author.bio', 'author.photo', 'category.name', 'category.description'] })
     const related = await api.getByIDs(doc.data.related.map(item => item.related_item.id), { fetchLinks: ['author.name', 'category.name'] })
     return { doc, related: related.results }
   }
@@ -40,7 +40,6 @@ export default class Article extends React.Component {
     const { author, category } = doc.data
     const authorName = author.data && author.data.name[0].text
     const categoryName = category.data ? category.data.name[0].text : false
-    console.log(doc.data.teaser)
     return (
       <PageWrapper style={{ background: '#DFDFDF' }}>
         <ContentWrapper style={{ ...coverWrapperStyle, backgroundImage: `url(${doc.data.cover.url})` }}>
@@ -77,8 +76,8 @@ const coverWrapperStyle = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  backgroundSize: '70%',
-  backgroundPosition: '81% center',
+  backgroundSize: 'auto 55%',
+  backgroundPosition: '89% 44px',
   backgroundRepeat: 'no-repeat',
   fontFamily: "'Source Serif Pro', serif"
 }

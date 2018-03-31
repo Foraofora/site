@@ -1,25 +1,25 @@
 import React from 'react'
-import { getByTag } from '~/lib/backend'
+import { getByAuthor } from '~/lib/backend'
 import PageWrapper from '~/components/struct/PageWrapper'
 import ContentWrapper from '~/components/struct/ContentWrapper'
 import Title from '~/components/Title'
 import ImageGrid from '~/components/ImageGrid'
-import Link from '~/components/base/Link'
+import MenuLink from '~/components/MenuLink'
 
-export default class pageAcoes extends React.Component {
+export default class pageAuthor extends React.Component {
   static async getInitialProps ({ req, query }) {
-    const { tag } = query
-    const { documents } = await getByTag(tag)
-    return { documents, tag }
+    const { authorID } = query
+    const { documents, author } = await getByAuthor(authorID)
+    return { documents, author }
   }
 
   render () {
-    const { documents, tag } = this.props
+    const { documents, author } = this.props
     return (
       <PageWrapper style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
           <div style={filtersWrapperStyle}>
-            <Title><Link href={{ pathname: '/acoes/tags' }}>/Palavras-chave</Link> /{tag}</Title>
+            <Title><MenuLink href={{ pathname: '/acoes/authors' }}>/Participantes</MenuLink> /{author.data.name[0].text}</Title>
           </div>
           <ImageGrid items={documents} />
         </ContentWrapper>

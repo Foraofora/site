@@ -16,7 +16,7 @@ export default class Footer extends React.Component {
             </div>
           </P>
         </ContentWrapper>
-        <CC style={ccText}/><span style={ccText}>Fora utiliza a licença creative commons bla bla blabla bla bla 2018 direitos reservados</span>
+        <CC style={ccText} /><span style={ccText}>Fora utiliza a licença creative commons bla bla blabla bla bla 2018 direitos reservados</span>
       </div>
     )
   }
@@ -26,14 +26,15 @@ const ccText = {
   fontFamily: 'IntervalBook, monospace',
   maxWidth: 200,
   display: 'inline-block',
-  verticalAlign: 'middle'
+  verticalAlign: 'middle',
+  marginRight: 10
 }
 
 const contactTextStyle = {
   fontSize: 26,
   fontFamily: "'Source Serif Pro', serif",
   fontWeight: 600,
-  margin: '50px 0'
+  margin: '80px 0 50px 0'
 }
 
 const linkStyle = {

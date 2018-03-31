@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Paragraph extends React.Component {
+export default class Quote extends React.Component {
   render () {
     const { style, quote, source } = this.props
     const sourceText = source[0].text

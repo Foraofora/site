@@ -29,7 +29,7 @@ export default class Index extends React.Component {
       <PageWrapper invert style={{background: '#dfdfdf'}}>
         <ContentWrapper style={coverWrapperStyle}>
           <Title>
-            <Link href={{ pathname: '/acoes' }}>/Ações & Imaginações</Link> /{categoryName}
+            <Link href={{ pathname: '/acoes' }}>/Ações & imaginações</Link> <Link href={{ pathname: '/acoes' }}>{`/${categoryName}`}</Link>
           </Title>
           <div style={coverMidStyle}>
             <h1 style={h1Style}>{ doc.data.title[0].text }</h1>
@@ -80,9 +80,11 @@ const coverBotStyle = {
 }
 const imageWrapperStyle = {
   display: 'flex',
-  marginTop: 50,
+  marginTop: 30,
   alignItems: 'flex-end',
-  justifyContent: 'flex-end'
+  justifyContent: 'flex-end',
+  maxWidth: '70%',
+  flex: 1
 }
 
 const h1Style = {
@@ -90,15 +92,17 @@ const h1Style = {
   alignSelf: 'flex-end',
   fontSize: 41,
   marginBottom: -8,
-  maxWidth: 480,
-  fontWeight: 600
+  maxWidth: '30%',
+  fontWeight: 600,
+  flex: 1
 }
 
 const authorStyle = {
   fontSize: 41,
   textAlign: 'center',
   marginBottom: 0,
-  maxHeight: 85
+  maxHeight: 85,
+  maxWidth: '35%'
 }
 
 const dateStyle = {

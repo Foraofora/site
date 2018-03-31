@@ -1,26 +1,32 @@
 import React from 'react'
 import Link from '~/components/base/Link'
 
-export default class CategoryTeaser extends React.Component {
-  render () {
-    const { tags } = this.props
-    if (!tags.length) return false
-    return (
-      <div style={wrapperStyle}>
-        <div>Tags</div>
-        {tags.map(tag => (
-          <div><Link href={{ pathname: '/acoes/tag', query: { tag } }}>
-            {tag}
+const TagsTeaser = ({ tags }) => {
+  if (!tags.length) return false
+  return (
+    <div className='root' >
+      <div>Tags</div>
+      {tags.map(tag => (
+        <div>
+          <Link href={{ pathname: '/acoes/tag', query: { tag } }}>
+            <a>
+              {tag}
+            </a>
           </Link>
-          </div>
-        ))}
-      </div>
-    )
-  }
+        </div>
+      ))}
+      <style jsx>{`
+        a { text-decoration: underline; }
+        a:hover { color: rgb(0,17,254); }
+        .root {
+          text-align: right;
+          font-family: IntervalBook, monospace;
+          font-size: 12px;
+          line-height: 1.25em;
+        }
+      `}</style>
+    </div>
+  )
 }
 
-const wrapperStyle = {
-  textAlign: 'right',
-  fontFamily: 'IntervalBook, monospace',
-  fontSize: 12
-}
+export default TagsTeaser

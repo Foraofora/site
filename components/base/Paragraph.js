@@ -1,5 +1,6 @@
 import React from 'react'
 import { MobileOnly, DesktopOnly } from '~/components/struct/Media'
+import { RichText } from 'prismic-reactjs'
 
 export default class ResponsiveParagraph extends React.Component {
   render () {
@@ -10,7 +11,7 @@ export default class ResponsiveParagraph extends React.Component {
           <Paragraph {...this.props}>{children}</Paragraph>
         </MobileOnly>
         <DesktopOnly>
-          <Paragraph {...this.props} style={{ ...style, ...desktopStyle }}>{children}</Paragraph>
+          <Paragraph {...this.props} style={{ ...desktopStyle, ...style }}>{children}</Paragraph>
         </DesktopOnly>
       </div>
     )
@@ -21,8 +22,7 @@ class Paragraph extends React.Component {
   render () {
     const { style, children } = this.props
     if (children instanceof Array) {
-      return children.map((child, index) =>
-        <p style={{ ...baseStyle, ...style }}>{child.text}</p>)
+      return <div style={{ ...baseStyle, ...style }}>{RichText.render(children)}</div>
     }
 
     return (

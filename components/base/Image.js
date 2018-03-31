@@ -23,7 +23,8 @@ export const Image = props => (props.dimensions
 const baseStyle = {
   maxWidth: '100%',
   maxHeight: '100%',
-  flex: 0
+  flex: 0,
+  height: 'auto'
 }
 
 export default Image

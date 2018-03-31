@@ -1,26 +1,26 @@
 import React from 'react'
-import { getTags } from '~/lib/backend'
+import { getAuthors } from '~/lib/backend'
 import PageWrapper from '~/components/struct/PageWrapper'
 import ContentWrapper from '~/components/struct/ContentWrapper'
 import Title from '~/components/Title'
 import MenuLink from '~/components/MenuLink'
 
-export default class pageTags extends React.Component {
+export default class pageAuthors extends React.Component {
   static async getInitialProps () {
-    return getTags()
+    return getAuthors()
   }
 
   render () {
-    const { tags } = this.props
+    const { authors } = this.props
     return (
       <PageWrapper style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
           <Title>
-            <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /Palavras-chave
+            <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /Participantes
           </Title>
           <div style={textStyle}>Quem faz — uma lista crescente de gente de Fora:</div>
-          <div style={tagsWrapperStyle}>
-            {tags.map(tag => <div style={tagsStyle}><MenuLink href={{ pathname: '/acoes/tag', query: { tag } }}>{tag};</MenuLink></div>)}
+          <div style={authorsWrapperStyle}>
+            {authors.map(author => <div style={authorsStyle}><MenuLink href={{ pathname: '/acoes/author', query: { authorID: author.id } }}>{author.data.name[0].text};</MenuLink></div>)}
           </div>
         </ContentWrapper>
       </PageWrapper>
@@ -34,7 +34,7 @@ const textStyle = {
   fontWeight: 600,
   margin: '10px 0'
 }
-const tagsWrapperStyle = {
+const authorsWrapperStyle = {
   display: 'flex',
   justifyContent: 'space-between',
   fontFamily: "'Source Serif Pro', serif",
@@ -44,6 +44,6 @@ const tagsWrapperStyle = {
   margin: '50px 60px'
 }
 
-const tagsStyle = {
+const authorsStyle = {
   width: '50%'
 }

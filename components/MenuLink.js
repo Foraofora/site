@@ -37,7 +37,6 @@ const wrapperStyle = {
   fontWeight: 600
 }
 const menuTextStyle = {
-  color: 'inherit',
   textDecoration: 'none',
   position: 'relative'
 }

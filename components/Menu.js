@@ -18,18 +18,18 @@ export default class Menu extends React.Component {
     return (
       <Modal visible={visible} style={{ ...menuModalStyle, backgroundImage: background }} onBgClick={onBgClick}>
         <div style={mainMenuWrapperStyle}>
-          <MenuLink href={{ pathname: '/o-que-e' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='oque' style={menuTextStyle}>O que é;</MenuLink>
-          <MenuLink href={{ pathname: '/acoes' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='acoes' style={menuTextStyle}>Ações & imaginações;</MenuLink>
+          <MenuLink href={{ pathname: '/o-que-e' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='oque' >O que é;</MenuLink>
+          <MenuLink href={{ pathname: '/acoes' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='acoes' >Ações & imaginações;</MenuLink>
         </div>
         <div style={secondaryMenuWrapperStyle}>
-          <span style={menuTextStyle} style={menuTextStyle}>Mapa do site;</span><br />
-          <MenuLink onClick={toggleSignup} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} style={menuTextStyle}>Boletim Informativo;</MenuLink>
+          <span >Mapa do site;</span><br />
+          <MenuLink onClick={toggleSignup} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} >Boletim Informativo;</MenuLink>
         </div>
         <div style={socialMenuWrapperStyle}>
-          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='fb' style={menuTextStyle}>Fb;</MenuLink>
-          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='tw' style={menuTextStyle}>Tw;</MenuLink>
-          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='ig' style={menuTextStyle}>Ig;</MenuLink>
-          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='yt' style={menuTextStyle}>Yt;</MenuLink>
+          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='fb' >Fb;</MenuLink>
+          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='tw' >Tw;</MenuLink>
+          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='ig' >Ig;</MenuLink>
+          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='yt' >Yt;</MenuLink>
         </div>
         <Modal visible={showSignup} onBgClick={this.toggleSignup}>
           <SignupForm />
@@ -58,14 +58,11 @@ const menuModalStyle = {
   color: 'black'
 }
 
-const menuTextStyle = {
-  fontSize: 40
-}
-
 const mainMenuWrapperStyle = {
   position: 'fixed',
   left: 175,
-  top: 21
+  top: 21,
+  fontSize: 40
 }
 
 const secondaryMenuWrapperStyle = {
@@ -73,11 +70,13 @@ const secondaryMenuWrapperStyle = {
   right: 20,
   top: '50%',
   transform: 'translateY(-50%)',
-  textAlign: 'right'
+  textAlign: 'right',
+  fontSize: 40
 }
 
 const socialMenuWrapperStyle = {
   position: 'fixed',
   right: 20,
-  bottom: 20
+  bottom: 20,
+  fontSize: 40
 }
