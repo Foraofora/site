@@ -33,7 +33,6 @@ const wrapperStyle = {
   position: 'relative',
   marginRight: 15,
   display: 'inline-block',
-  fontFamily: "'Source Serif Pro', serif",
   fontWeight: 600
 }
 const menuTextStyle = {
@@ -46,5 +45,5 @@ const underlineStyle = {
   position: 'absolute',
   bottom: '0.13em',
   left: '0',
-  right: '-1%'
+  right: '1.6%'
 }

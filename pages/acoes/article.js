@@ -3,7 +3,7 @@ import Prismic from 'prismic-javascript'
 import ContentWrapper from '~/components/struct/ContentWrapper'
 import PageWrapper from '~/components/struct/PageWrapper'
 import P from '~/components/base/Paragraph'
-import Link from '~/components/base/Link'
+import MenuLink from '~/components/MenuLink'
 import Quote from '~/components/base/Quote'
 import Title from '~/components/Title'
 import Sidebars from '~/components/Sidebars'
@@ -44,7 +44,7 @@ export default class Article extends React.Component {
       <PageWrapper style={{ background: '#DFDFDF' }}>
         <ContentWrapper style={{ ...coverWrapperStyle, backgroundImage: `url(${doc.data.cover.url})` }}>
           <Title>
-            <Link href={{ pathname: '/acoes' }}>/Ações & Imaginações</Link> /{categoryName}
+            <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /{categoryName}
           </Title>
           <div>
             <h1 style={h1Style}>{ title }</h1>
@@ -59,11 +59,13 @@ export default class Article extends React.Component {
         </ContentWrapper>
 
         <ContentWrapper style={{ marginTop: 50, position: 'relative' }}>
-          <Sidebars doc={doc} />
           <div style={doc.data.teaser[0].text !== '' ? {} : { marginTop: '-40vh' }}>
-            {this.renderBody()}
+            <Sidebars doc={doc} />
+            <div>
+              {this.renderBody()}
+            </div>
+            <AuthorTeaser author={author} style={{ marginTop: 80 }} />
           </div>
-          <AuthorTeaser author={author} style={{ marginTop: 80 }} />
         </ContentWrapper>
         <RelatedContentWrapper related={related} />
       </PageWrapper>

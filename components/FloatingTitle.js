@@ -30,11 +30,14 @@ export default class FloatingTitle extends React.Component {
   }
 
   handleScroll = () => {
-    const { wrapperEl } = this.refs
-    const viewportOffset = wrapperEl.getBoundingClientRect()
+    const viewportOffset = this.refs.Wrapper.getBoundingClientRect()
+    const containerViewportOffset = this.refs.Wrapper.parentElement.parentElement.getBoundingClientRect()
     const spaceBelow = window.innerHeight - viewportOffset.bottom
+    const containerSpaceBelow = containerViewportOffset.bottom - window.innerHeight
+    console.log(containerSpaceBelow)
     const distanceBottom = window.innerHeight / 2 + 130
     if (spaceBelow < distanceBottom) return
+    if (containerSpaceBelow < 200) return
     this.setState({ topOffset: spaceBelow - distanceBottom })
   }
 }

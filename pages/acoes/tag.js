@@ -21,6 +21,7 @@ export default class pageAcoes extends React.Component {
           <div style={filtersWrapperStyle}>
             <Title><Link href={{ pathname: '/acoes/tags' }}>/Palavras-chave</Link> /{tag}</Title>
           </div>
+          <div style={textStyle}>{documents.length === 1 ? `1 trabalho:` : `${documents.length} trabalhos:`}</div>
           <ImageGrid items={documents} />
         </ContentWrapper>
       </PageWrapper>
@@ -32,6 +33,12 @@ export default class pageAcoes extends React.Component {
   }
 }
 
+const textStyle = {
+  fontFamily: "'Source Serif Pro', serif",
+  fontSize: 24,
+  fontWeight: 600,
+  margin: '10px 0'
+}
 const filtersWrapperStyle = {
   display: 'flex',
   justifyContent: 'space-between',

@@ -34,7 +34,7 @@ class LogoWithMenu extends React.Component {
 
 const wrapperStyle = {
   position: 'fixed',
-  zIndex: 2,
+  zIndex: 15,
   top: 17,
   left: 29,
   maxWidth: 750

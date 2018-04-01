@@ -2,18 +2,20 @@ import React from 'react'
 import Modal from '~/components/struct/Modal'
 import MenuLink from './MenuLink'
 import SignupForm from './SignupForm'
+import SiteMap from '~/components/SiteMap'
 
 export default class Menu extends React.Component {
   state = {
     showSignup: false,
+    showSitemap: false,
     background: false
   }
 
   render () {
     const {
-      props, state, handleMenuMouseEnter, handleMenuMouseLeave, toggleSignup
+      props, state, handleMenuMouseEnter, handleMenuMouseLeave, toggleSignup, toggleSitemap
     } = this
-    const { showSignup, background } = state
+    const { showSignup, showSitemap, background } = state
     const { visible, onBgClick } = props
     return (
       <Modal visible={visible} style={{ ...menuModalStyle, backgroundImage: background }} onBgClick={onBgClick}>
@@ -22,7 +24,7 @@ export default class Menu extends React.Component {
           <MenuLink href={{ pathname: '/acoes' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='acoes' >Ações & imaginações;</MenuLink>
         </div>
         <div style={secondaryMenuWrapperStyle}>
-          <span >Mapa do site;</span><br />
+          <MenuLink onClick={toggleSitemap} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} >Mapa do site;</MenuLink><br />
           <MenuLink onClick={toggleSignup} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} >Boletim Informativo;</MenuLink>
         </div>
         <div style={socialMenuWrapperStyle}>
@@ -34,13 +36,15 @@ export default class Menu extends React.Component {
         <Modal visible={showSignup} onBgClick={this.toggleSignup}>
           <SignupForm />
         </Modal>
+        <Modal visible={showSitemap} onBgClick={this.toggleSitemap}>
+          <SiteMap />
+        </Modal>
       </Modal>
     )
   }
 
-  toggleSignup = (event) => {
-    this.setState({ showSignup: !this.state.showSignup })
-  }
+  toggleSignup = (event) => this.setState({ showSignup: !this.state.showSignup })
+  toggleSitemap = (event) => this.setState({ showSitemap: !this.state.showSitemap })
 
   handleMenuMouseEnter = (key) => {
     this.setState({ background: `url("/static/menu-${key}.png")` })
@@ -55,14 +59,16 @@ const menuModalStyle = {
   backgroundSize: '80%',
   backgroundPosition: 'center center',
   backgroundRepeat: 'no-repeat',
-  color: 'black'
+  color: 'black',
+  fontFamily: "'Source Serif Pro', serif",
+  fontSize: 40,
+  zIndex: 10
 }
 
 const mainMenuWrapperStyle = {
   position: 'fixed',
   left: 175,
-  top: 21,
-  fontSize: 40
+  top: 21
 }
 
 const secondaryMenuWrapperStyle = {
@@ -70,13 +76,11 @@ const secondaryMenuWrapperStyle = {
   right: 20,
   top: '50%',
   transform: 'translateY(-50%)',
-  textAlign: 'right',
-  fontSize: 40
+  textAlign: 'right'
 }
 
 const socialMenuWrapperStyle = {
   position: 'fixed',
   right: 20,
-  bottom: 20,
-  fontSize: 40
+  bottom: 20
 }

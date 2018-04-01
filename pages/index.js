@@ -1,6 +1,6 @@
 import React from 'react'
 import Prismic from 'prismic-javascript'
-
+import Head from '~/components/struct/Head'
 import LogoWithMenu from '~/components/LogoWithMenu'
 import SliderTunnel from '~/components/SliderTunnel'
 
@@ -19,6 +19,7 @@ export default class Index extends React.Component {
     return (
       <div>
         <LogoWithMenu flash slogan={title} />
+        <Head />
         <SliderTunnel documents={documents} />
       </div>
     )

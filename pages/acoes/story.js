@@ -9,7 +9,7 @@ import Sidebars from '~/components/Sidebars'
 import AuthorTeaser from '~/components/AuthorTeaser'
 import Image from '~/components/base/Image'
 import P from '~/components/base/Paragraph'
-import Link from '~/components/base/Link'
+import MenuLink from '~/components/MenuLink'
 import RelatedContentWrapper from '~/components/RelatedContentWrapper'
 
 export default class Story extends React.Component {
@@ -31,7 +31,7 @@ export default class Story extends React.Component {
       <PageWrapper style={{ background: '#DFDFDF', fontFamily: "'Source Serif Pro', serif" }}>
         <ContentWrapper style={coverWrapperStyle}>
           <Title>
-            <Link href={{ pathname: '/acoes' }}>/Ações & Imaginações</Link> /{category}
+            <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /{category}
           </Title>
           <div style={coverMidStyle}>
             <h1 style={h1Style}>{ title }</h1>

@@ -4,7 +4,6 @@ import Link from '~/components/base/Link'
 export default class ImageGridItem extends React.Component {
   render () {
     const { data, type, id } = this.props
-    console.log(this.props)
     const title = data.title instanceof Array ? data.title[0].text : false
     const author = data.author.data ? data.author.data.name[0].text : false
     const category = this.props.data.category.data ? this.props.data.category.data.name[0].text : false

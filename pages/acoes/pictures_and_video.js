@@ -5,9 +5,9 @@ import ContentWrapper from '~/components/struct/ContentWrapper'
 import Title from '~/components/Title'
 import AuthorTeaser from '~/components/AuthorTeaser'
 import Sidebars from '~/components/Sidebars'
-import Image from '~/components/base/Image'
+import ImageGalery from '~/components/base/ImageGalery'
 import P from '~/components/base/Paragraph'
-import Link from '~/components/base/Link'
+import MenuLink from '~/components/MenuLink'
 import RelatedContentWrapper from '~/components/RelatedContentWrapper'
 
 export default class Index extends React.Component {
@@ -23,18 +23,17 @@ export default class Index extends React.Component {
     const { author, photos, category } = doc.data
     const authorName = author.data && author.data.name[0].text
     const categoryName = category.data && category.data.name[0].text
-    const coverPhoto = photos[0].photo.cover ? photos[0].photo.cover : photos[0].photo
 
     return (
       <PageWrapper invert style={{background: '#dfdfdf'}}>
         <ContentWrapper style={coverWrapperStyle}>
           <Title>
-            <Link href={{ pathname: '/acoes' }}>/Ações & imaginações</Link> <Link href={{ pathname: '/acoes' }}>{`/${categoryName}`}</Link>
+            <MenuLink href={{ pathname: '/acoes' }}>/Ações & imaginações</MenuLink> <MenuLink href={{ pathname: '/acoes' }}>{`/${categoryName}`}</MenuLink>
           </Title>
           <div style={coverMidStyle}>
             <h1 style={h1Style}>{ doc.data.title[0].text }</h1>
             <div style={imageWrapperStyle}>
-              <Image {...coverPhoto} />
+              <ImageGalery photos={photos} />
             </div>
           </div>
           <div style={coverBotStyle}>
@@ -79,12 +78,10 @@ const coverBotStyle = {
   maxHeight: 91
 }
 const imageWrapperStyle = {
-  display: 'flex',
   marginTop: 30,
-  alignItems: 'flex-end',
-  justifyContent: 'flex-end',
   maxWidth: '70%',
-  flex: 1
+  flex: 1,
+  textAlign: 'right'
 }
 
 const h1Style = {
@@ -102,7 +99,8 @@ const authorStyle = {
   textAlign: 'center',
   marginBottom: 0,
   maxHeight: 85,
-  maxWidth: '35%'
+  maxWidth: '35%',
+  zIndex: 1
 }
 
 const dateStyle = {

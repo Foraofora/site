@@ -27,15 +27,16 @@ const baseStyle = {
   left: 0,
   right: 0,
   bottom: 0,
-  zIndex: 1
+  zIndex: 1,
+  transition: '0.1s all ease-out'
 }
 
 const hideStyle = {
   ...baseStyle,
   opacity: 0,
-  pointerEvents: 'none'
+  pointerEvents: 'none',
+  transition: '0.1s all ease-in'
   // transform: 'translate3d(0,-100px,0px)',
-  // transition: '0.3s all ease-in'
 }
 
 const showStyle = {

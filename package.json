@@ -12,7 +12,8 @@
     "prismic-reactjs": "^0.3.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-responsive": "^4.1.0"
+    "react-responsive": "^4.1.0",
+    "recompose": "^0.26.0"
   },
   "scripts": {
     "dev": "next",

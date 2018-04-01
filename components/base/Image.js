@@ -6,9 +6,9 @@ export const SimpleImage = props => (
 
 export const LazyImage = (props) => {
   const { dimensions, url, style } = props
+
   return (
     <img
-      {...props}
       src={url}
       width={dimensions.width}
       height={dimensions.height}
@@ -24,7 +24,9 @@ const baseStyle = {
   maxWidth: '100%',
   maxHeight: '100%',
   flex: 0,
-  height: 'auto'
+  height: 'auto',
+  width: 'auto',
+  verticalAlign: 'bottom',
 }
 
 export default Image

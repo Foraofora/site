@@ -28,7 +28,7 @@ const wrapperStyle = {
 
 const textStyle = {
   maxWidth: 420,
-  fontFamily: 'monospace',
+  fontFamily: 'IntervalBook, monospace',
   fontSize: 14,
   paddingLeft: 7
 }

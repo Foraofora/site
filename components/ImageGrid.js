@@ -6,11 +6,13 @@ export default class ImageGrid extends React.Component {
   render () {
     if (!this.props.items) return null
     return (
-      <div style={wrapperStyle}>
-        {this.renderItems()}
-        <div style={{ width: 200, margin: '0 4%' }} />
-        <div style={{ width: 200, margin: '0 4%' }} />
-        <div style={{ width: 200, margin: '0 4%' }} />
+      <div style={{overflow: 'hidden'}}>
+        <div style={wrapperStyle}>
+          {this.renderItems()}
+          <div style={{ width: 200, margin: '0 4%' }} />
+          <div style={{ width: 200, margin: '0 4%' }} />
+          <div style={{ width: 200, margin: '0 4%' }} />
+        </div>
       </div>
     )
   }
@@ -29,7 +31,7 @@ export default class ImageGrid extends React.Component {
 const wrapperStyle = {
   display: 'flex',
   justifyContent: 'space-between',
-  margin: '50px -46px 0',
+  margin: '50px -4% 0',
   flexWrap: 'wrap'
 
 }

@@ -10,7 +10,7 @@ export default class Logo extends React.Component {
     const { flash } = this.props
     setInterval(() => {
       if (flash) { this.setState({ flashing: !this.state.flashing }) }
-    }, 200)
+    }, 100)
   }
 
   render () {
