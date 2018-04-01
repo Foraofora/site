@@ -14,13 +14,19 @@ class LogoWithMenu extends React.Component {
   }
 
   render () {
+    const { menuVisible } = this.state
+    const { slogan, invert, flash } = this.props
+    const logoProps = {
+      invert: menuVisible ? false : invert,
+      flash: menuVisible ? false : flash
+    }
     return (
       <div>
         <div style={wrapperStyle}>
-          <Logo {...this.props} onClick={this.handleLogoClick} />
-          {!this.state.menuVisible && <span style={textStyle}>{this.props.slogan}</span>}
+          <Logo {...logoProps} onClick={this.handleLogoClick} />
+          {!menuVisible && <span style={textStyle}>{slogan}</span>}
         </div>
-        <Menu visible={this.state.menuVisible} onBgClick={this.toggleMenu} />
+        <Menu visible={menuVisible} onBgClick={this.toggleMenu} />
       </div>
     )
   }

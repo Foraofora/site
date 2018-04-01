@@ -36,7 +36,7 @@ export default class Story extends React.Component {
           <div style={coverMidStyle}>
             <h1 style={h1Style}>{ title }</h1>
             <div style={imageWrapperStyle}>
-              <Image src={doc.data.cover.url} />
+              <Image {...doc.data.cover} />
             </div>
           </div>
           <div style={coverBotStyle}>

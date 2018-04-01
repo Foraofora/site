@@ -15,7 +15,7 @@ export const ImageGalery = enhance(
         {...photos[0].photo.cover}
         onOpenImage={() => setVisible(!visible)}
       />
-      <Modal visible={visible} onBgClick={() => setVisible(!visible)} style={{zIndex: 100}}>
+      <Modal visible={visible} onBgClick={() => setVisible(!visible)} style={{zIndex: 100, background: 'rgba(0,0,0,0.9)'}}>
         <ImageGaleryModal photos={photos} />
       </Modal>
     </span>

@@ -7,8 +7,8 @@ export default class Logo extends React.Component {
   }
 
   componentDidMount () {
-    const { flash } = this.props
     setInterval(() => {
+      const { flash } = this.props
       if (flash) { this.setState({ flashing: !this.state.flashing }) }
     }, 100)
   }
@@ -31,8 +31,9 @@ export default class Logo extends React.Component {
 
   getLogoColor = () => {
     const { hover, flashing } = this.state
-    const { invert } = this.props
-    if (hover || flashing) return 'rgb(0,17,254)'
+    const { invert, flash } = this.props
+    if (hover) return 'rgb(0,17,254)'
+    if (flash && flashing) return 'rgb(0,17,254)'
     if (invert) return 'white'
     return 'black'
   }

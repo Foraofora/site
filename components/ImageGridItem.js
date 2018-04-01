@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from '~/components/base/Link'
+import Image from '~/components/base/Image'
 
 export default class ImageGridItem extends React.Component {
   render () {
@@ -20,6 +21,11 @@ export default class ImageGridItem extends React.Component {
             {title}{author && <span style={{ fontWeight: 400 }}><br />-<br />{author}</span>}
           </h3>
         </Link>
+        <style jsx>{`
+          div:hover {
+            color: rgb(0,17,254);
+          }
+        `}</style>
       </div>
     )
   }
@@ -31,29 +37,29 @@ export default class ImageGridItem extends React.Component {
       return (
         <div>
           <div style={{ ...imageWrapperStyle, transform: 'translate3d(7px, -7px, 0)' }}>
-            <img src={photos[0].photo.thumb.url} style={imageStyle} />
+            <Image {...photos[0].photo.thumb} style={imageStyle} />
           </div>
           {photos[1] && <div style={{ ...imageWrapperStyle, transform: 'translate3d(-7px, 7px, 0)' }}>
-            <img src={photos[1].photo.thumb.url} style={imageStyle} />
+            <Image {...photos[1].photo.thumb} style={imageStyle} />
           </div>}
         </div>
       )
     }
-    return <div style={imageWrapperStyle}><img src={photos.url} style={imageStyle} /></div>
+    return <div style={imageWrapperStyle}><Image {...photos.thumb} style={imageStyle} /></div>
   }
 }
 
 const wrapperStyle = {
-  width: 200,
-  margin: '0 4%'
+  width: 250,
+  margin: '0 2%'
 }
 const headerStyle = {
   fontFamily: 'IntervalBook, monospace',
   fontSize: 12
 }
 const imageStackStyle = {
-  width: 200,
-  height: 200,
+  width: 250,
+  height: 250,
   position: 'relative'
 }
 const imageWrapperStyle = {

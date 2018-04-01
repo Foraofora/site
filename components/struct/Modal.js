@@ -28,14 +28,14 @@ const baseStyle = {
   right: 0,
   bottom: 0,
   zIndex: 1,
-  transition: '0.1s all ease-out'
+  transition: '0.1s opacity ease-out'
 }
 
 const hideStyle = {
   ...baseStyle,
   opacity: 0,
   pointerEvents: 'none',
-  transition: '0.1s all ease-in'
+  transition: '0.1s opacity ease-in'
   // transform: 'translate3d(0,-100px,0px)',
 }
 

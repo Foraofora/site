@@ -9,7 +9,7 @@ export default class CustomLink extends React.Component {
   render () {
     if (this.props.onClick) {
       return (
-        <a href='#' style={{ ...LinkStyle, ...this.props.style }} {...this.props}>{this.props.children}</a>
+        <a style={{ ...LinkStyle, ...this.props.style }} {...this.props}>{this.props.children}</a>
       )
     }
     return (
@@ -20,5 +20,6 @@ export default class CustomLink extends React.Component {
 
 const LinkStyle = {
   color: 'inherit',
-  textDecoration: 'none'
+  textDecoration: 'none',
+  cursor: 'pointer'
 }

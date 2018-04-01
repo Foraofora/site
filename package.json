@@ -12,6 +12,7 @@
     "prismic-reactjs": "^0.3.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-lazyload": "^2.3.0",
     "react-responsive": "^4.1.0",
     "recompose": "^0.26.0"
   },
@@ -42,5 +43,14 @@
     "plugins": [
       "babel-plugin-root-import"
     ]
+  },
+  "now": {
+    "name": "fora",
+    "alias": [
+      "fora-dev"
+    ],
+    "env": {
+      "NODE_ENV": "production"
+    }
   }
 }

@@ -11,13 +11,24 @@ const enhance = compose(
 const ImageGaleryModal = ({ photos, position, setPosition, selected, setSelected }) => {
   let slider = null
 
-  const handleRClick = () => {
+  const handleGaleryRClick = () => {
     if (position - 800 < -slider.getBoundingClientRect().width) return
     setPosition(position - 600)
   }
+  const handleGaleryLClick = () => {
+    setPosition(position < 0 ? position + 600 : position)
+  }
+  const handleImageRClick = () => {
+    setSelected(false);
+    setTimeout(() => setSelected(selected < photos.length - 1 ? selected + 1 : selected), 1)
+  }
+  const handleImageLClick = () => {
+    setSelected(false);
+    setTimeout(() => setSelected(selected > 0 ? selected - 1 : selected), 1)
+  }
   return (
     <div>
-      <div style={{...sliderStyle, transform: `translate3d(${position}px, -50%, 0)`}} ref={(div) => { slider = div }}>
+      <div style={{...sliderStyle, transform: `translate3d(calc(-50% - ${position}px), -50%, 0)`}} ref={(div) => { slider = div }}>
         <div style={rowStyle}>
           {photos.map((photo, i) => i % 2 === 0 &&
             <div onClick={() => setSelected(i)}>
@@ -33,12 +44,12 @@ const ImageGaleryModal = ({ photos, position, setPosition, selected, setSelected
           )}
         </div>
       </div>
-      <span style={leftNavStyle} onClick={() => setPosition(position < 0 ? position + 600 : position)}>L</span>
-      <span style={rightNavStyle} onClick={handleRClick}>R</span>
+      <span style={leftNavStyle} onClick={handleGaleryLClick}>L</span>
+      <span style={rightNavStyle} onClick={handleGaleryRClick}>R</span>
       <Modal visible={selected !== false} onBgClick={() => setSelected(false)} style={imageStyle}>
-        {selected !== false && <Image {...photos[selected].photo} />}
-        <span style={leftNavStyle} onClick={() => setSelected(selected > 0 ? selected - 1 : selected)}>L</span>
-        <span style={rightNavStyle} onClick={() => setSelected(selected < photos.length-1 ? selected + 1 : selected)}>R</span>
+        {photos[selected] && <Image {...photos[selected].photo} />}
+        <span style={leftNavStyle} onClick={handleImageLClick}>L</span>
+        <span style={rightNavStyle} onClick={handleImageRClick}>R</span>
       </Modal>
     </div>
   )
@@ -48,12 +59,14 @@ const sliderStyle = {
   height: 540,
   position: 'absolute',
   top: '50%',
+  left: '50%',
   transition: '1s transform'
 }
 const rowStyle = {
   display: 'flex',
   alignItems: 'center',
-  height: 540 / 2
+  height: 540 / 2,
+  justifyContent: 'center'
 }
 const itemStyle = {
   maxWidth: 250,
@@ -65,7 +78,11 @@ const itemStyle = {
 const imageStyle = {
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  padding: 50,
+  backgroundImage: 'url(https://media1.tenor.com/images/582d284f5d27f8d71a4097db21dd5bfd/tenor.gif?itemid=4904442)',
+  backgroundPosition: 'center center',
+  backgroundRepeat: 'no-repeat'
 }
 const leftNavStyle = {
   position: 'absolute',

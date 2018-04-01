@@ -19,7 +19,7 @@ export default class FloatingTitle extends React.Component {
     const { topOffset } = this.state
     return (
       <div ref='Wrapper' style={{ position: 'relative' }}>
-        <div style={{ ...wrapperStyle, transform: `rotateZ(-90deg) translate3d(-${topOffset}px, 0, 0)` }}>
+        <div style={{ ...wrapperStyle, transform: `rotateZ(-90deg) translate3d(-${topOffset}px, 0, 0)`, opacity: topOffset > 4 ? 1 : 0 }}>
           <DesktopOnly>
             <div style={titleStyle}>{ this.props.title }</div>
             <div>{ this.props.author }</div>
@@ -34,10 +34,10 @@ export default class FloatingTitle extends React.Component {
     const containerViewportOffset = this.refs.Wrapper.parentElement.parentElement.getBoundingClientRect()
     const spaceBelow = window.innerHeight - viewportOffset.bottom
     const containerSpaceBelow = containerViewportOffset.bottom - window.innerHeight
-    console.log(containerSpaceBelow)
     const distanceBottom = window.innerHeight / 2 + 130
+    console.log(spaceBelow - distanceBottom)
     if (spaceBelow < distanceBottom) return
-    if (containerSpaceBelow < 200) return
+    if (containerSpaceBelow < -100) return
     this.setState({ topOffset: spaceBelow - distanceBottom })
   }
 }
@@ -50,7 +50,9 @@ const wrapperStyle = {
   top: 130,
   left: -60,
   position: 'absolute',
-  pointerEvents: 'none'
+  pointerEvents: 'none',
+  opacity: 1,
+  transition: '.3s opacity .1s'
 }
 
 const titleStyle = {
