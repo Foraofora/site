@@ -11,6 +11,10 @@ app.prepare()
   .then(() => {
     const server = express()
 
+    server.get('/acoes/artigo/:id', (req, res) => {
+      return app.render(req, res, '/acoes/article', { id: req.params.id })
+    })
+
     server.get('*', (req, res) => {
       return handle(req, res)
     })
