@@ -6,10 +6,15 @@ export default class SignupForm extends React.Component {
       <div style={wrapperStyle}>
         <div>
           <p style={textStyle}>Digite seu e-mail e pressione Enter para receber o Boletim informativo FORA diretamente em sua caixa de e-emails.</p>
-          <input type='text' style={inputStyle} />
+          <input type='text' style={inputStyle} onKeyDown={this.handleKeyDown} />
         </div>
       </div>
     )
+  }
+
+  handleKeyDown = (e) => {
+    if (e.keyCode !== 13) return
+    console.log('enter')
   }
 }
 

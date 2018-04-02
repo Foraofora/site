@@ -133,5 +133,6 @@ const dateStyle = {
 }
 
 const bodyStyle = {
-  fontFamily: "'Source Sans Pro', sans-serif"
+  fontFamily: "'Source Sans Pro', sans-serif",
+  marginTop: '-1em'
 }
