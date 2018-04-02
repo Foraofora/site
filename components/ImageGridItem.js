@@ -40,7 +40,7 @@ export default class ImageGridItem extends React.Component {
             <Image {...photos[0].photo.thumb} style={imageStyle} />
           </div>
           {photos[1] && <div style={{ ...imageWrapperStyle, transform: 'translate3d(-7px, 7px, 0)' }}>
-            <Image {...photos[1].photo.thumb} style={imageStyle} />
+            <Image {...photos[1].photo.thumb} style={imageStyle} loadDelay={150} />
           </div>}
         </div>
       )
@@ -79,7 +79,7 @@ const imageStyle = {
 const titleStyle = {
   textAlign: 'center',
   fontFamily: "'Source Serif Pro', serif",
-  fontSize: 26,
+  fontSize: 24,
   fontWeight: 600,
   marginTop: 20
 }

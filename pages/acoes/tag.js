@@ -16,7 +16,7 @@ export default class pageAcoes extends React.Component {
   render () {
     const { documents, tag } = this.props
     return (
-      <PageWrapper style={{ background: '#DFDFDF' }}>
+      <PageWrapper title={`#${tag}`} style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
           <div style={filtersWrapperStyle}>
             <Title><Link href={{ pathname: '/acoes/tags' }}>/Palavras-chave</Link> /{tag}</Title>

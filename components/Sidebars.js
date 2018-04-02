@@ -12,8 +12,8 @@ export const Sidebars = (props) => {
     <div>
       <FloatingTitle author={authorName} title={title} />
       <div style={{ position: 'relative' }}>
-        <div style={{ position: 'absolute', right: 0, width: 160 }}>
-          <CategoryTeaser category={category} />
+        <div style={{ position: 'absolute', right: 0, width: 190 }}>
+          <CategoryTeaser category={category} style={{marginBottom: 30}} />
           <TagsTeaser tags={tags} />
         </div>
       </div>

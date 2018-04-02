@@ -28,20 +28,29 @@ export default class Story extends React.Component {
     const category = doc.data.category.data ? doc.data.category.data.name[0].text : false
 
     return (
-      <PageWrapper style={{ background: '#DFDFDF', fontFamily: "'Source Serif Pro', serif" }}>
+      <PageWrapper
+        style={{ background: '#DFDFDF', fontFamily: "'Source Serif Pro', serif" }}
+        title={title}
+      >
         <ContentWrapper style={coverWrapperStyle}>
           <Title>
             <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /{category}
           </Title>
           <div style={coverMidStyle}>
-            <h1 style={h1Style}>{ title }</h1>
+            <h1 style={h1Style}>
+              { title }
+              <br />-<br />
+              <span style={{ fontWeight: 400 }}>
+                { authorName && `Por ${authorName}` }
+              </span>
+            </h1>
             <div style={imageWrapperStyle}>
               <Image {...doc.data.cover} />
             </div>
           </div>
           <div style={coverBotStyle}>
-            <p style={dateStyle} />
-            <p style={authorStyle}>{ authorName && `Por ${authorName}` }</p>
+            <p style={{width: 0}} />
+            <P style={authorStyle}>{doc.data.teaser}</P>
             <p style={dateStyle}>18.02.18</p>
           </div>
         </ContentWrapper>
@@ -87,16 +96,13 @@ const coverMidStyle = {
 }
 const coverBotStyle = {
   display: 'flex',
-  justifyContent: 'space-between',
-  maxHeight: 91
+  justifyContent: 'space-between'
 }
 const imageWrapperStyle = {
-  display: 'flex',
   marginTop: 30,
-  alignItems: 'flex-end',
-  justifyContent: 'flex-end',
   maxWidth: '70%',
-  flex: 1
+  flex: 1,
+  textAlign: 'right'
 }
 
 const h1Style = {
@@ -104,24 +110,26 @@ const h1Style = {
   alignSelf: 'flex-end',
   fontSize: 41,
   marginBottom: -8,
-  maxWidth: '30%',
+  maxWidth: '40%',
   fontWeight: 600,
   flex: 1
 }
 
 const authorStyle = {
-  fontSize: 41,
-  textAlign: 'center',
-  marginBottom: 0,
-  maxHeight: 85,
-  maxWidth: '35%'
+  fontSize: 24,
+  padding: 0,
+  marginTop: 50,
+  fontWeight: 600,
+  marginBottom: '-1em'
 }
 
 const dateStyle = {
   width: 200,
   textAlign: 'right',
   fontSize: 41,
-  marginBottom: 0
+  marginBottom: 0,
+  alignSelf: 'flex-end',
+  lineHeight: '1em'
 }
 
 const bodyStyle = {

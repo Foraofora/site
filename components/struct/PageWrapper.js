@@ -8,7 +8,7 @@ export default class PageWrapper extends React.Component {
   render () {
     return (
       <div style={{ ...wrapperStyle, ...this.props.style }}>
-        <Head />
+        <Head title={this.props.title}/>
         <LogoWithMenu invert={this.props.invert} />
         {this.props.children}
         <ContentWrapper>

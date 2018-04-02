@@ -13,7 +13,7 @@ export default class pageTags extends React.Component {
   render () {
     const { tags } = this.props
     return (
-      <PageWrapper style={{ background: '#DFDFDF' }}>
+      <PageWrapper title='Palavras-chave' style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
           <Title>
             <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /Palavras-chave

@@ -16,7 +16,7 @@ export default class pageAuthor extends React.Component {
   render () {
     const { documents, author } = this.props
     return (
-      <PageWrapper style={{ background: '#DFDFDF' }}>
+      <PageWrapper title={author.data.name[0].text} style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
           <div style={filtersWrapperStyle}>
             <Title><MenuLink href={{ pathname: '/acoes/authors' }}>/Participantes</MenuLink> /{author.data.name[0].text}</Title>

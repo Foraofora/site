@@ -13,7 +13,7 @@ export default class pageAuthors extends React.Component {
   render () {
     const { authors } = this.props
     return (
-      <PageWrapper style={{ background: '#DFDFDF' }}>
+      <PageWrapper title='Participantes' style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
           <Title>
             <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /Participantes

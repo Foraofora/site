@@ -21,7 +21,7 @@ export default class pageAcoes extends React.Component {
     const { documents, categories } = this.props
     const { selectedCategory } = this.state
     return (
-      <PageWrapper style={{ background: '#DFDFDF' }}>
+      <PageWrapper title='Ações & imaginações' style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
           <div style={filtersWrapperStyle}>
             <Title>/Ações & Imaginações</Title>
@@ -51,5 +51,6 @@ const filtersWrapperStyle = {
   justifyContent: 'space-between',
   fontFamily: "'Source Serif Pro', serif",
   fontWeight: 600,
-  fontSize: 41
+  fontSize: 41,
+  alignItems: 'flex-start'
 }

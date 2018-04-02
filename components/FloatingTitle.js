@@ -35,7 +35,7 @@ export default class FloatingTitle extends React.Component {
     const spaceBelow = window.innerHeight - viewportOffset.bottom
     const containerSpaceBelow = containerViewportOffset.bottom - window.innerHeight
     const distanceBottom = window.innerHeight / 2 + 130
-    console.log(spaceBelow - distanceBottom)
+
     if (spaceBelow < distanceBottom) return
     if (containerSpaceBelow < -100) return
     this.setState({ topOffset: spaceBelow - distanceBottom })

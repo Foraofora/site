@@ -41,7 +41,7 @@ export default class Article extends React.Component {
     const authorName = author.data && author.data.name[0].text
     const categoryName = category.data ? category.data.name[0].text : false
     return (
-      <PageWrapper style={{ background: '#DFDFDF' }}>
+      <PageWrapper title={title} style={{ background: '#DFDFDF' }}>
         <ContentWrapper style={{ ...coverWrapperStyle, backgroundImage: `url(${doc.data.cover.url})` }}>
           <Title>
             <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /{categoryName}
@@ -58,13 +58,13 @@ export default class Article extends React.Component {
           <P style={teaserStyle}>{ doc.data.teaser }</P>
         </ContentWrapper>
 
-        <ContentWrapper style={{ marginTop: 50, position: 'relative' }}>
-          <div style={doc.data.teaser[0].text !== '' ? {} : { marginTop: '-40vh' }}>
+        <ContentWrapper style={{ position: 'relative' }}>
+          <div style={doc.data.teaser[0].text !== '' ? {} : { marginTop: '-26vh' }}>
             <Sidebars doc={doc} />
             <div>
               {this.renderBody()}
             </div>
-            <AuthorTeaser author={author} style={{ marginTop: 80 }} />
+            <AuthorTeaser author={author} style={{ marginTop: 80, paddingLeft: 0 }} />
           </div>
         </ContentWrapper>
         <RelatedContentWrapper related={related} />
@@ -78,7 +78,7 @@ const coverWrapperStyle = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  backgroundSize: 'auto 55%',
+  backgroundSize: 'auto 65%',
   backgroundPosition: '89% 44px',
   backgroundRepeat: 'no-repeat',
   fontFamily: "'Source Serif Pro', serif"
@@ -96,7 +96,8 @@ const h1Style = {
   alignSelf: 'flex-end',
   marginBottom: 0,
   fontSize: 41,
-  fontWeight: 600
+  fontWeight: 600,
+  maxWidth: '40%'
 }
 
 const authorStyle = {
@@ -109,11 +110,11 @@ const dateStyle = {
   margin: 0
 }
 const teaserStyle = {
-  fontSize: 22,
+  fontSize: 24,
   fontWeight: 600,
-  maxWidth: 780,
-  paddingLeft: 160,
-  paddingRight: 160
+  maxWidth: 600,
+  paddingLeft: 0,
+  marginBottom: '-1em'
 }
 
 const bodyStyle = {

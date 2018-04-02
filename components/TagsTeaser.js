@@ -5,7 +5,7 @@ const TagsTeaser = ({ tags }) => {
   if (!tags.length) return false
   return (
     <div className='root' >
-      <div>Tags</div>
+      <p className='title'>Tags</p>
       {tags.map(tag => (
         <div>
           <Link href={{ pathname: '/acoes/tag', query: { tag } }}>

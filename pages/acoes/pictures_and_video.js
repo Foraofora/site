@@ -20,12 +20,12 @@ export default class Index extends React.Component {
 
   render () {
     const { doc, related } = this.props
-    const { author, photos, category } = doc.data
+    const { author, photos, category, videos } = doc.data
     const authorName = author.data && author.data.name[0].text
     const categoryName = category.data && category.data.name[0].text
 
     return (
-      <PageWrapper invert style={{background: '#dfdfdf'}}>
+      <PageWrapper invert title={doc.data.title[0].text} style={{background: '#dfdfdf'}}>
         <ContentWrapper style={coverWrapperStyle}>
           <Title>
             <MenuLink href={{ pathname: '/acoes' }}>/Ações & imaginações</MenuLink> <MenuLink href={{ pathname: '/acoes' }}>{`/${categoryName}`}</MenuLink>
@@ -33,7 +33,7 @@ export default class Index extends React.Component {
           <div style={coverMidStyle}>
             <h1 style={h1Style}>{ doc.data.title[0].text }</h1>
             <div style={imageWrapperStyle}>
-              <ImageGalery photos={photos} />
+              <ImageGalery media={{videos, photos}} />
             </div>
           </div>
           <div style={coverBotStyle}>
@@ -69,37 +69,36 @@ const coverWrapperStyle = {
 }
 const coverMidStyle = {
   display: 'flex',
-  justifyContent: 'space-between',
-  maxHeight: '80%'
+  justifyContent: 'space-between'
 }
 const coverBotStyle = {
   display: 'flex',
   justifyContent: 'space-between',
-  maxHeight: 91
+  paddingTop: 10,
+  maxHeight: 52
 }
 const imageWrapperStyle = {
   marginTop: 30,
-  maxWidth: '70%',
-  flex: 1,
-  textAlign: 'right'
+  marginBottom: 12,
+  textAlign: 'right',
+  flex: 1
 }
 
 const h1Style = {
   paddingRight: 30,
-  alignSelf: 'flex-end',
   fontSize: 41,
-  marginBottom: -8,
-  maxWidth: '30%',
   fontWeight: 600,
-  flex: 1
+  alignSelf: 'flex-end',
+  margin: 0,
+  minWidth: '30%'
 }
 
 const authorStyle = {
   fontSize: 41,
   textAlign: 'center',
-  marginBottom: 0,
+  margin: 0,
   maxHeight: 85,
-  maxWidth: '35%',
+  maxWidth: '40%',
   zIndex: 1
 }
 
@@ -107,9 +106,10 @@ const dateStyle = {
   width: 200,
   textAlign: 'right',
   fontSize: 41,
-  marginBottom: 0
+  margin: 0
 }
 
 const bodyStyle = {
-  fontFamily: "'Source Sans Pro', sans-serif"
+  fontFamily: "'Source Sans Pro', sans-serif",
+  marginTop: '-1em'
 }

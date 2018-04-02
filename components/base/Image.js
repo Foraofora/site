@@ -6,25 +6,34 @@ export const SimpleImage = props => (
 )
 
 export const LazyImage = (props) => {
-  const { dimensions, url, style } = props
+  const { dimensions, url, style, loadDelay } = props
   let image = null
   return (
-    <LazyLoad height={dimensions.height} once >
+    <LazyLoad
+      height={dimensions.height}
+      placeholder={
+        <img width={dimensions.width}
+          height={dimensions.height}
+          style={{ ...lazyStyle, ...style }}
+        />
+      }
+    >
       <img
+        {...props}
         src={url}
         width={dimensions.width}
         height={dimensions.height}
         style={{ ...lazyStyle, ...style }}
-        onLoad={() => loadTransform(image)}
+        onLoad={() => loadTransform({ image, loadDelay })}
         ref={el => { image = el }}
       />
     </LazyLoad>
   )
 }
 
-const loadTransform = image => {
-  setTimeout(() => { image.style.opacity = 1 }, 1)
-  setTimeout(() => { image.style.transform = 'scale(1)' }, 1)
+const loadTransform = ({image, loadDelay}) => {
+  setTimeout(() => { image.style.opacity = 1 }, 1 + loadDelay)
+  setTimeout(() => { image.style.transform = 'scale(1)' }, 1 + loadDelay)
 }
 
 export const Image = props => (props.dimensions
@@ -33,16 +42,17 @@ export const Image = props => (props.dimensions
 const baseStyle = {
   maxWidth: '100%',
   maxHeight: '100%',
-  flex: 0,
   height: 'auto',
   width: 'auto',
-  verticalAlign: 'bottom'
+  overflow: 'hidden',
+  verticalAlign: 'middle'
 }
+
 const lazyStyle = {
   ...baseStyle,
   opacity: 0,
   transform: 'scale(1.2)',
-  transition: '.2s opacity .2s linear, .4s transform .1s ease-out'
+  transition: '.2s opacity .1s linear, .4s transform ease-out'
 }
 
 export default Image

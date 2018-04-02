@@ -40,7 +40,7 @@ const baseStyle = {
 const desktopStyle = {
   paddingLeft: 200,
   paddingRight: 200,
-  maxWidth: 660,
+  maxWidth: 600,
   marginLeft: 'auto',
   marginRight: 'auto'
 }

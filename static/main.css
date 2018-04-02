@@ -30,8 +30,8 @@ a, a:active {
   display: block;
   position: fixed;
   z-index: 1031;
-  top: 50%;
-  right: 50%;
+  top: calc(50% - 25px);
+  right: calc(50% - 25px);
 }
 
 #nprogress .spinner-icon {
