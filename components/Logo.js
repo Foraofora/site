@@ -1,48 +1,67 @@
 import React from 'react'
 
 export default class Logo extends React.Component {
-  state = {
-    hover: false,
-    flashing: false
-  }
-
-  componentDidMount () {
-    setInterval(() => {
-      const { flash } = this.props
-      if (flash) { this.setState({ flashing: !this.state.flashing }) }
-    }, 100)
-  }
-
   render () {
-    const { hover, flashing } = this.state
     return (
-      <a
-        href='#'
-        onMouseEnter={() => this.setState({ hover: true })}
-        onMouseLeave={() => this.setState({ hover: false })}
-        {...this.props}
-      >
-        <LogoSvg
-          color={this.getLogoColor()}
-        />
+      <a href='#' {...this.props}>
+        <LogoSvg animation={this.props.animation} invert={this.props.invert} />
       </a>
     )
-  }
-
-  getLogoColor = () => {
-    const { hover, flashing } = this.state
-    const { invert, flash } = this.props
-    if (hover) return 'rgb(0,17,254)'
-    if (flash && flashing) return 'rgb(0,17,254)'
-    if (invert) return 'white'
-    return 'black'
   }
 }
 
 class LogoSvg extends React.Component {
   render () {
     return (
-      <svg width='111' height='43' style={{ marginBottom: -2 }}><g fill={this.props.color || '#000'} fillRule='evenodd'><path d='M43.21956 11.0573c-8.95471 0-15.78548 7.48077-15.78548 15.60885 0 8.18678 6.83077 15.66754 15.78548 15.66754 8.95204 0 15.7257-7.48076 15.7257-15.66754 0-8.12808-6.77366-15.60884-15.7257-15.60884zm0 24.32608c-4.654 0-8.30632-3.59309-8.30632-8.71723 0-5.06598 3.65232-8.71724 8.30632-8.71724 4.6524 0 8.18625 3.65126 8.18625 8.71724 0 5.12414-3.53386 8.71723-8.18625 8.71723zM2.85185 0H0v41.09135h8.0048V24.54808h14.94232v-6.9375H8.0048V7.47115h18.14423V0H2.85184M88.58654 11.74038v6.9375h8.58169c-7.30626 4.26924-12.2479 8.2076-12.2479 14.53727 0 5.59536 3.82844 8.6105 9.30586 8.6105 3.78734 0 6.75713-1.26796 8.4819-3.93623h.2871v3.20193H111V11.74038H88.58654zm8.0507 24.4088c-2.886 0-3.85885-2.00334-3.85885-3.71103 0-2.86145 2.74565-5.25436 10.2168-9.84004v8.92963c-1.60096 2.95804-3.70302 4.62144-6.35795 4.62144zM72.78612 14.40865h.32446v-2.66827h-8.00481v29.35097h8.0048V25.84112c0-4.88827 1.20767-7.16324 6.2731-7.16324h1.73171v-7.62057c-3.73557 0-6.61997 1.21673-8.32926 3.35134' /></g></svg>
+      <svg viewBox="0 0 114 43" className={this.props.animation}>
+        <style type='text/css' dangerouslySetInnerHTML={{__html: `
+          svg #teste {
+            fill: ${this.props.invert ? 'white' : 'black'};
+          }
+          svg:hover #teste {
+            fill: rgb(0,17,254) !important;
+            animation: none;
+            -webkit-animation: none;
+            -moz-animation: none;
+          }
+          .pulse #teste {
+            -webkit-animation-name: pulse;
+            -webkit-animation-duration: .2s;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation: pulse .2s infinite;
+            animation: pulse .3s infinite;
+          }
+          .fade #teste {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 3s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+            -moz-animation: fade 3s linear infinite;
+            animation: fade 3s linear infinite;
+          }
+          @keyframes pulse {
+            50% {fill: initial;}
+            99% {fill: rgb(0,17,254);}
+          }
+          @keyframes fade {
+            0% {opacity: 0}
+            50% {opacity: 1;}
+            100% {opacity: 0;}
+          }
+        `}}
+        />
+        <path id='teste'
+          d="M43.22 11.057c-8.955 0-15.786 7.481-15.786 15.61 0 8.186 6.83 15.667 15.786 15.667 8.952 0 15.725-7.481 15.725-15.668 0-8.128-6.773-15.609-15.725-15.609zm0 24.326c-4.654 0-8.307-3.593-8.307-8.717 0-5.066 3.653-8.717 8.307-8.717 4.652 0 8.186 3.651 8.186 8.717 0 5.124-3.534 8.717-8.186 8.717zM2.852 0H0v41.091h8.005V24.548h14.942v-6.937H8.005V7.47h18.144V0H2.852m85.735 11.74v6.938h8.581c-7.306 4.27-12.248 8.207-12.248 14.537 0 5.596 3.829 8.61 9.306 8.61 3.788 0 6.757-1.267 8.482-3.936h.287v3.202H111v-29.35H88.587zm8.05 24.41c-2.886 0-3.859-2.004-3.859-3.712 0-2.861 2.746-5.254 10.217-9.84v8.93c-1.6 2.958-3.703 4.621-6.358 4.621zm-23.85-21.741h.324V11.74h-8.005v29.351h8.005v-15.25c0-4.888 1.207-7.163 6.273-7.163h1.731v-7.62c-3.735 0-6.62 1.216-8.329 3.35"
+          classname="logo-group"
+          fillrule="evenodd"
+        />
+        <style jsx>{`
+          svg {
+            width: 114px;
+            height: 45px;
+          }
+        `}</style>
+      </svg>
     )
   }
 }

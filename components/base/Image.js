@@ -6,8 +6,9 @@ export const SimpleImage = props => (
 )
 
 export const LazyImage = (props) => {
-  const { dimensions, url, style, loadDelay } = props
+  const { dimensions, url, style, loadDelay, onClick } = props
   let image = null
+
   return (
     <LazyLoad
       height={dimensions.height}
@@ -19,13 +20,13 @@ export const LazyImage = (props) => {
       }
     >
       <img
-        {...props}
         src={url}
         width={dimensions.width}
         height={dimensions.height}
         style={{ ...lazyStyle, ...style }}
         onLoad={() => loadTransform({ image, loadDelay })}
         ref={el => { image = el }}
+        onClick={onClick}
       />
     </LazyLoad>
   )

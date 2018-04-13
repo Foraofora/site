@@ -2,12 +2,11 @@ import React from 'react'
 import Prismic from 'prismic-javascript'
 import PageWrapper from '~/components/struct/PageWrapper'
 import ContentWrapper from '~/components/struct/ContentWrapper'
-import Title from '~/components/Title'
+import PhotosAndVideosCover from '~/components/PhotosAndVideosCover'
+import PhotosAndVideosCoverMobile from '~/components/PhotosAndVideosCoverMobile'
 import AuthorTeaser from '~/components/AuthorTeaser'
 import Sidebars from '~/components/Sidebars'
-import ImageGalery from '~/components/base/ImageGalery'
 import P from '~/components/base/Paragraph'
-import MenuLink from '~/components/MenuLink'
 import RelatedContentWrapper from '~/components/RelatedContentWrapper'
 
 export default class Index extends React.Component {
@@ -21,35 +20,26 @@ export default class Index extends React.Component {
   render () {
     const { doc, related } = this.props
     const { author, photos, category, videos } = doc.data
-    const authorName = author.data && author.data.name[0].text
-    const categoryName = category.data && category.data.name[0].text
-
+    const coverPhoto = photos.length ? photos[0].photo.url : videos[0].video.thumbnail_url
     return (
-      <PageWrapper invert title={doc.data.title[0].text} style={{background: '#dfdfdf'}}>
-        <ContentWrapper style={coverWrapperStyle}>
-          <Title>
-            <MenuLink href={{ pathname: '/acoes' }}>/Ações & imaginações</MenuLink> <MenuLink href={{ pathname: '/acoes' }}>{`/${categoryName}`}</MenuLink>
-          </Title>
-          <div style={coverMidStyle}>
-            <h1 style={h1Style}>{ doc.data.title[0].text }</h1>
-            <div style={imageWrapperStyle}>
-              <ImageGalery media={{videos, photos}} />
-            </div>
-          </div>
-          <div style={coverBotStyle}>
-            <p style={dateStyle} />
-            <p style={authorStyle}>{ authorName && `Por ${authorName}` }</p>
-            <p style={dateStyle}>18.02.18</p>
-          </div>
-        </ContentWrapper>
+      <PageWrapper invert title={doc.data.title[0].text} cover={coverPhoto} style={{background: '#dfdfdf'}}>
+        <div className='desktop-only'><PhotosAndVideosCover {...this.props} /></div>
+        <div className='mobile-only'><PhotosAndVideosCoverMobile {...this.props} /></div>
 
-        <ContentWrapper style={{ paddingTop: '70px', paddingBottom: '70px', position: 'relative', ...invertStyle }}>
+        <ContentWrapper style={{ paddingBottom: '70px', position: 'relative', ...invertStyle }}>
           <Sidebars doc={doc} />
           <P style={bodyStyle}>{ doc.data.corpo }</P>
-          <AuthorTeaser author={author} style={{ marginTop: 80 }} />
+          <AuthorTeaser author={author} style={{ marginTop: 80, paddingLeft: 0 }} />
         </ContentWrapper>
-
         <RelatedContentWrapper related={related} />
+        <style jsx>{`
+          @media only screen and (max-width: 752px) {
+            div.desktop-only { display: none; }
+          }
+          @media only screen and (min-width: 752px) {
+            div.mobile-only { display: none; }
+          }
+        `}</style>
       </PageWrapper>
     )
   }
@@ -59,54 +49,6 @@ const invertStyle = {
   background: '#000',
   color: 'white',
   fontFamily: "'Source Serif Pro', serif"
-}
-const coverWrapperStyle = {
-  ...invertStyle,
-  height: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between'
-}
-const coverMidStyle = {
-  display: 'flex',
-  justifyContent: 'space-between'
-}
-const coverBotStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  paddingTop: 10,
-  maxHeight: 52
-}
-const imageWrapperStyle = {
-  marginTop: 30,
-  marginBottom: 12,
-  textAlign: 'right',
-  flex: 1
-}
-
-const h1Style = {
-  paddingRight: 30,
-  fontSize: 41,
-  fontWeight: 600,
-  alignSelf: 'flex-end',
-  margin: 0,
-  minWidth: '30%'
-}
-
-const authorStyle = {
-  fontSize: 41,
-  textAlign: 'center',
-  margin: 0,
-  maxHeight: 85,
-  maxWidth: '40%',
-  zIndex: 1
-}
-
-const dateStyle = {
-  width: 200,
-  textAlign: 'right',
-  fontSize: 41,
-  margin: 0
 }
 
 const bodyStyle = {

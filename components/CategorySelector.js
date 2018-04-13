@@ -7,8 +7,20 @@ export default class CategorySelector extends React.Component {
   }
   render () {
     return (
-      <div style={wrapperStyle}>
+      <div>
         {this.renderItems()}
+        <style jsx>{`
+          div {
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 600;
+            font-size: 33px;
+          }
+          @media only screen and (min-width: 752px) {
+            div {
+              font-size: 41px;
+            }
+          }
+        `}</style>
       </div>
     )
   }
@@ -17,7 +29,7 @@ export default class CategorySelector extends React.Component {
     const { categories, selected, onClick } = this.props
     return categories.map((category) => {
       const name = category.data.name[0].text
-      const isSelected = selected == name
+      const isSelected = selected === name
       return (
         <CategorySelectorItem
           name={category.data.name[0].text}
@@ -28,10 +40,4 @@ export default class CategorySelector extends React.Component {
       )
     })
   }
-}
-
-const wrapperStyle = {
-  fontFamily: "'Source Serif Pro', serif",
-  fontWeight: 600,
-  fontSize: 41
 }

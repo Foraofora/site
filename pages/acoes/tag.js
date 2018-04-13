@@ -21,7 +21,6 @@ export default class pageAcoes extends React.Component {
           <div style={filtersWrapperStyle}>
             <Title><Link href={{ pathname: '/acoes/tags' }}>/Palavras-chave</Link> /{tag}</Title>
           </div>
-          <div style={textStyle}>{documents.length === 1 ? `1 trabalho:` : `${documents.length} trabalhos:`}</div>
           <ImageGrid items={documents} />
         </ContentWrapper>
       </PageWrapper>

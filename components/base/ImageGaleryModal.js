@@ -1,32 +1,51 @@
 import React from 'react'
-import { withState, withProps, compose } from 'recompose'
+import { withState, lifecycle, compose } from 'recompose'
 import Modal from '~/components/struct/Modal'
 import Image from '~/components/base/Image'
 import Video from '~/components/base/Video'
 
 const enhance = compose(
   withState('position', 'setPosition', 0),
-  withState('selected', 'setSelected', false)
+  withState('selected', 'setSelected', false),
+  lifecycle({
+    componentDidMount () {
+      window.addEventListener('resize', () => {
+        this.setState({
+          windowWidth: window.innerWidth,
+          sliderWidth: document.getElementById('slider').getBoundingClientRect().width
+        })
+      })
+      setInterval(() => window.dispatchEvent(new Event('resize')), 1000)
+    }
+  })
 )
 
-const ImageGaleryModal = ({ photos, videos, position, setPosition, selected, setSelected }) => {
-  let slider = null
+const ImageGaleryModal = ({ photos, videos, position, setPosition, selected, setSelected, windowWidth, sliderWidth }) => {
   const media = photos || videos
 
+  const isGaleryStart = () => {
+    if (position > 0) return false
+    if (-(sliderWidth / 2 - windowWidth / 2) < position) return false
+    return true
+  }
+
+  const isGaleryEnd = () => {
+    if (position < 0) return false
+    if ((sliderWidth / 2 - windowWidth / 2) > position) return false
+    return true
+  }
+
   const handleGaleryRClick = () => {
-    if (window.innerWidth/2 > slider.getBoundingClientRect().width/2) return false
-    if (slider.getBoundingClientRect().width / 2 - window.innerWidth / 2 - position > 600) return setPosition(position + 600)
-    if (slider.getBoundingClientRect().width / 2 - window.innerWidth / 2 - position > 0) return setPosition(position + (slider.getBoundingClientRect().width / 2 - window.innerWidth / 2 - position))
+    if (window.innerWidth/2 > sliderWidth / 2) return false
+    if (sliderWidth / 2 - window.innerWidth / 2 - position > 600) return setPosition(position + 600)
+    if (sliderWidth / 2 - window.innerWidth / 2 - position > 0) return setPosition(position + (sliderWidth / 2 - window.innerWidth / 2 - position))
   }
   const handleGaleryLClick = () => {
     if (position > 600) return setPosition(position - 600)
     if (position < 600 && position > 0) return setPosition(0)
-    if (window.innerWidth/2 > slider.getBoundingClientRect().width/2) return false
-    if (-(slider.getBoundingClientRect().width / 2 - window.innerWidth / 2) < position - 600) return setPosition(position - 600)
-    if (-(slider.getBoundingClientRect().width / 2 - window.innerWidth / 2) < position) return setPosition(-(slider.getBoundingClientRect().width / 2 - window.innerWidth / 2) + position)
-
-
-
+    if (window.innerWidth/2 > sliderWidth / 2) return false
+    if (-(sliderWidth / 2 - window.innerWidth / 2) < position - 600) return setPosition(position - 600)
+    if (-(sliderWidth / 2 - window.innerWidth / 2) < position) return setPosition(-(sliderWidth / 2 - window.innerWidth / 2) + position)
     setPosition(position > 0 ? position - 600 : position)
   }
   const handleImageRClick = () => {
@@ -40,7 +59,7 @@ const ImageGaleryModal = ({ photos, videos, position, setPosition, selected, set
 
   return (
     <div>
-      <div style={{...sliderStyle, transform: `translate3d(calc(-50% - ${position}px), -50%, 0)`}} ref={(div) => { slider = div }}>
+      <div style={{...sliderStyle, transform: `translate3d(calc(-50% - ${position}px), -50%, 0)`}} id='slider'>
         <div style={rowStyle}>
           {media.map((item, i) => i % 2 === 0 &&
             <div onClick={() => setSelected(i)}>
@@ -58,13 +77,14 @@ const ImageGaleryModal = ({ photos, videos, position, setPosition, selected, set
           )}
         </div>
       </div>
-      <span style={leftNavStyle} onClick={handleGaleryLClick}>←</span>
-      <span style={rightNavStyle} onClick={handleGaleryRClick}>→</span>
+      {!isGaleryStart() && <span style={leftNavStyle} onClick={handleGaleryLClick}>←</span>}
+      {!isGaleryEnd() && <span style={rightNavStyle} onClick={handleGaleryRClick}>→</span>}
       <Modal visible={selected !== false} onBgClick={() => setSelected(false)} style={imageStyle}>
         {selected !== false && media[selected].photo && <Image {...media[selected].photo} />}
         {selected !== false && media[selected].video && <Video {...media[selected].video} />}
-        <span style={leftNavStyle} onClick={handleImageLClick}>←</span>
-        <span style={rightNavStyle} onClick={handleImageRClick}>→</span>
+        {selected !== false && media[selected].subtitle && <a>{media[selected].subtitle}</a>}
+        {selected > 0 && <span style={leftNavStyle} onClick={handleImageLClick}>←</span>}
+        {selected !== media.length-1 && <span style={rightNavStyle} onClick={handleImageRClick}>→</span>}
       </Modal>
     </div>
   )
@@ -95,16 +115,18 @@ const imageStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   padding: 50,
-  backgroundImage: 'url(https://media1.tenor.com/images/582d284f5d27f8d71a4097db21dd5bfd/tenor.gif?itemid=4904442)',
+  backgroundImage: 'url(/static/loading.gif)',
   backgroundPosition: 'center center',
   backgroundRepeat: 'no-repeat',
-  backgroundColor: 'black'
+  backgroundColor: 'black',
+  flexDirection: 'column',
+  backgroundSize: '120px 80px'
 }
 const leftNavStyle = {
   position: 'absolute',
   top: '46%',
   left: 10,
-  fontSize: 60,
+  fontSize: 90,
   fontFamily: 'Arial',
   cursor: 'pointer'
 }

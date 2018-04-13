@@ -5,12 +5,12 @@ import ContentWrapper from '~/components/struct/ContentWrapper'
 const titleStyle = {
   marginLeft: 60,
   fontFamily: 'IntervalBook, monospace',
-  fontSize: 14
+  fontSize: 16
 }
 export const RelatedContentWrapper = ({ related }) => (
   related.length > 0 &&
-    <ContentWrapper>
-      <span style={titleStyle}>/Trabalhos Relacionados</span>
+    <ContentWrapper style={{background: 'white'}}>
+      <span style={titleStyle}>/Publicações relacionadas</span>
       <ImageGrid items={related} />
     </ContentWrapper>
 )

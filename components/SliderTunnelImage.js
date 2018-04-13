@@ -7,25 +7,36 @@ export default class SliderTunnelImage extends React.Component {
     animation: 'start',
     xOffset: Math.floor(Math.random() * 90 + 5),
     yOffset: Math.floor(Math.random() * 90 + 5),
-    hover: false
+    hover: false,
+    photo: null
   }
 
   componentDidMount () {
-    setTimeout(() => this.setState({ animation: 'begin' }), 500)
+    setTimeout(() => this.setState({ animation: 'begin' }), 50)
     setTimeout(() => this.setState({ animation: 'run' }), 1500)
     setTimeout(() => this.setState({ animation: 'end' }), 9000)
+    const { doc } = this.props
+    if (!doc) return null
+    const { type, data } = doc
+    switch (type) {
+      case 'article':
+        return this.setState({photo: data.cover.cover ? data.cover.cover.url : data.cover.url})
+      case 'story':
+        return this.setState({photo: data.cover.cover ? data.cover.cover.url : data.cover.url})
+      default:
+        return this.setState({photo: data.photos.length ? data.photos[Math.floor(Math.random() * data.photos.length)].photo.url : data.videos[0].video.thumbnail_url})
+    }
   }
 
   render () {
     const { doc } = this.props
     if (!doc) return null
     const { type, id } = doc
-    const photos = doc.data.photos || doc.data.cover
-    const photoUrl = photos.length ? photos[0].photo.url : photos.url
+
     return (
       <div style={this.getCurrentStyle()} onMouseEnter={() => this.setState({ hover: true })} onMouseLeave={() => this.setState({ hover: false })}>
         <Link href={{ pathname: `/acoes/${type}`, query: { id } }}>
-          <Image src={photoUrl} />
+          <Image src={this.state.photo} />
         </Link>
       </div>
     )

@@ -18,7 +18,7 @@ export default class pageTags extends React.Component {
           <Title>
             <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /Palavras-chave
           </Title>
-          <div style={textStyle}>Quem faz — uma lista crescente de gente de Fora:</div>
+          <div style={textStyle}>Hashtags:</div>
           <div style={tagsWrapperStyle}>
             {tags.map(tag => <div style={tagsStyle}><MenuLink href={{ pathname: '/acoes/tag', query: { tag } }}>{tag};</MenuLink></div>)}
           </div>

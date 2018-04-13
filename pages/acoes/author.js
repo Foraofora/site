@@ -21,7 +21,6 @@ export default class pageAuthor extends React.Component {
           <div style={filtersWrapperStyle}>
             <Title><MenuLink href={{ pathname: '/acoes/authors' }}>/Participantes</MenuLink> /{author.data.name[0].text}</Title>
           </div>
-          <div style={textStyle}>{documents.length === 1 ? `1 trabalho:` : `${documents.length} trabalhos:`}</div>
           <ImageGrid items={documents} />
         </ContentWrapper>
       </PageWrapper>

@@ -31,7 +31,6 @@ export default class ImageGrid extends React.Component {
 const wrapperStyle = {
   display: 'flex',
   justifyContent: 'space-between',
-  margin: '50px -2% 0',
+  margin: '50px -1.3% 0',
   flexWrap: 'wrap'
-
 }

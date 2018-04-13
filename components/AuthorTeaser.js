@@ -6,14 +6,13 @@ import {RichText} from 'prismic-reactjs'
 export default class AuthorTeaser extends React.Component {
   render () {
     const { author, style } = this.props
-
     if (!author.data) return false
     const bio = author.data.bio
     return (
       <P style={style}>
         <span style={wrapperStyle}>
           <Image {...author.data.photo} style={imageStyle} />
-          {RichText.render(bio)}
+          <div style={{marginTop: '-1em'}}>{RichText.render(bio)}</div>
         </span>
       </P>
     )
@@ -23,8 +22,9 @@ export default class AuthorTeaser extends React.Component {
 const wrapperStyle = {
   display: 'flex',
   fontFamily: 'IntervalBook, monospace',
-  fontSize: 12,
-  alignItems: 'flex-start'
+  fontSize: 13,
+  alignItems: 'flex-start',
+  lineHeight: '1.3em'
 }
 
 const imageStyle = {

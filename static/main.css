@@ -2,7 +2,6 @@ html {
   min-height: 100%;
   width: 100%;
 }
-
 body {
   margin: 0;
   overflow-x: hidden;
@@ -13,9 +12,25 @@ a, a:active {
   color: inherit;
 }
 
+::selection {
+  background: rgb(0,17,254); /* WebKit/Blink Browsers */
+  color: white;
+}
+::-moz-selection {
+  background: rgb(0,17,254); /* Gecko Browsers */
+  color: white;
+}
+
 /* Make clicks pass-through */
 #nprogress {
   pointer-events: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.95);
+  z-index: 1000;
 }
 
 #nprogress .bar {
@@ -36,22 +51,18 @@ a, a:active {
   display: block;
   position: fixed;
   z-index: 1031;
-  top: calc(50% - 25px);
-  right: calc(50% - 25px);
+  top: calc(50% - 50px);
+  right: calc(50% - 50px);
 }
 
 #nprogress .spinner-icon {
-  width: 50px;
-  height: 50px;
+  width: 120px;
+  height: 120px;
   box-sizing: border-box;
-
-  border: solid 2px transparent;
-  border-top-color: rgb(0,17,254);
-  border-left-color: rgb(0,17,254);
-  border-radius: 50%;
-
-  -webkit-animation: nprogress-spinner 400ms linear infinite;
-          animation: nprogress-spinner 400ms linear infinite;
+  background-image: url('/static/loading.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .nprogress-custom-parent {

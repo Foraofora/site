@@ -2,12 +2,14 @@ import React from 'react'
 import CategoryTeaser from '~/components/CategoryTeaser'
 import FloatingTitle from '~/components/FloatingTitle'
 import TagsTeaser from '~/components/TagsTeaser'
+import TecnicalData from '~/components/TecnicalData'
 
 export const Sidebars = (props) => {
   const { tags, data } = props.doc
   const { category, author } = data
   const title = data.title[0].text
   const authorName = author.data && author.data.name[0].text
+
   return (
     <div>
       <FloatingTitle author={authorName} title={title} />
@@ -15,6 +17,7 @@ export const Sidebars = (props) => {
         <div style={{ position: 'absolute', right: 0, width: 190 }}>
           <CategoryTeaser category={category} style={{marginBottom: 30}} />
           <TagsTeaser tags={tags} />
+          <TecnicalData tecnicalData={props.doc.data.tecnical_data} />
         </div>
       </div>
     </div>

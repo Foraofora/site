@@ -1,5 +1,5 @@
 import React from 'react'
-import { withState, withHandlers, compose } from 'recompose'
+import { withState, withHandlers, compose, withProps } from 'recompose'
 import Modal from '~/components/struct/Modal'
 import ImageGaleryCover from './ImageGaleryCover'
 import ImageGaleryModal from './ImageGaleryModal'
@@ -13,10 +13,11 @@ export const ImageGalery = ({
 }) =>
   <div style={{height: '100%', maxHeight: '100%'}}>
     <ImageGaleryCover
-      {...photos[0].photo.cover}
+      photo={photos.length && photos[0].photo}
+      video={!photos.length && videos[0].video}
       onImageClick={togglePhotoModal}
-      onPhotoGaleryClick={togglePhotoModal}
-      onVideoGaleryClick={videos.length ? toggleVideoModal : false}
+      onPhotoGaleryClick={ photos.length ? togglePhotoModal : false}
+      onVideoGaleryClick={ videos.length > 1 ? toggleVideoModal : false }
     />
     <Modal
       visible={photoGaleryVisible}

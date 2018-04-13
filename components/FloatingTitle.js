@@ -18,13 +18,14 @@ export default class FloatingTitle extends React.Component {
   render () {
     const { topOffset } = this.state
     return (
+
       <div ref='Wrapper' style={{ position: 'relative' }}>
-        <div style={{ ...wrapperStyle, transform: `rotateZ(-90deg) translate3d(-${topOffset}px, 0, 0)`, opacity: topOffset > 4 ? 1 : 0 }}>
-          <DesktopOnly>
+        <DesktopOnly>
+          <div style={{ ...wrapperStyle, transform: `rotateZ(-90deg) translate3d(-${topOffset}px, 0, 0)`, opacity: topOffset > 20 ? 1 : 0 }}>
             <div style={titleStyle}>{ this.props.title }</div>
             <div>{ this.props.author }</div>
-          </DesktopOnly>
-        </div>
+          </div>
+        </DesktopOnly>
       </div>
     )
   }
@@ -45,17 +46,18 @@ export default class FloatingTitle extends React.Component {
 const wrapperStyle = {
   textAlign: 'center',
   fontFamily: 'IntervalBook, monospace',
-  fontSize: 16,
-  width: 260,
+  fontSize: 13,
+  width: 500,
   top: 130,
-  left: -60,
+  left: -185,
   position: 'absolute',
   pointerEvents: 'none',
   opacity: 1,
-  transition: '.3s opacity .1s'
+  transition: '.3s opacity .1s',
+  lineHeight: '1.3em'
 }
 
 const titleStyle = {
   marginBottom: 5,
-  fontFamily: 'IntervalSlanted, monospace'
+  fontFamily: 'IntervalBold, monospace'
 }

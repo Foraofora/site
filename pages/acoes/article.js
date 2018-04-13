@@ -3,12 +3,13 @@ import Prismic from 'prismic-javascript'
 import ContentWrapper from '~/components/struct/ContentWrapper'
 import PageWrapper from '~/components/struct/PageWrapper'
 import P from '~/components/base/Paragraph'
-import MenuLink from '~/components/MenuLink'
 import Quote from '~/components/base/Quote'
-import Title from '~/components/Title'
+import ArticleCover from '~/components/ArticleCover'
+import ArticleCoverMobile from '~/components/ArticleCoverMobile'
 import Sidebars from '~/components/Sidebars'
 import AuthorTeaser from '~/components/AuthorTeaser'
 import RelatedContentWrapper from '~/components/RelatedContentWrapper'
+import NotedParagraph from '~/components/base/NotedParagraph'
 
 export default class Article extends React.Component {
   static async getInitialProps ({ query }) {
@@ -31,34 +32,22 @@ export default class Article extends React.Component {
           <Quote {...slice.primary} />
         )
       }
+      if (slice.slice_type === 'texto_e_nota') {
+        return <NotedParagraph {...slice.primary} />
+      }
     })
   }
 
   render () {
     const { doc, related } = this.props
     const title = doc.data.title[0].text
-    const { author, category } = doc.data
-    const authorName = author.data && author.data.name[0].text
-    const categoryName = category.data ? category.data.name[0].text : false
+    const { author } = doc.data
+
     return (
-      <PageWrapper title={title} style={{ background: '#DFDFDF' }}>
-        <ContentWrapper style={{ ...coverWrapperStyle, backgroundImage: `url(${doc.data.cover.url})` }}>
-          <Title>
-            <MenuLink href={{ pathname: '/acoes' }}>/Ações & Imaginações</MenuLink> /{categoryName}
-          </Title>
-          <div>
-            <h1 style={h1Style}>{ title }</h1>
-            { authorName && <div style={h1Style}>-</div> }
-            <div style={coverBotStyle}>
-              <p style={authorStyle}>{ authorName && `Por ${authorName}` }</p>
-              <p style={dateStyle}>18.02.18</p>
-            </div>
-          </div>
-
-          <P style={teaserStyle}>{ doc.data.teaser }</P>
-        </ContentWrapper>
-
-        <ContentWrapper style={{ position: 'relative' }}>
+      <PageWrapper title={title} cover={doc.data.cover.url} style={{ background: '#DFDFDF' }}>
+        <div className='desktop-only'><ArticleCover {...this.props} /></div>
+        <div className='mobile-only'><ArticleCoverMobile {...this.props} /></div>
+        <ContentWrapper style={{ ...bodyStyle, position: 'relative' }}>
           <div style={doc.data.teaser[0].text !== '' ? {} : { marginTop: '-26vh' }}>
             <Sidebars doc={doc} />
             <div>
@@ -68,53 +57,17 @@ export default class Article extends React.Component {
           </div>
         </ContentWrapper>
         <RelatedContentWrapper related={related} />
+        <style jsx>{`
+          @media only screen and (max-width: 752px) {
+            div.desktop-only { display: none; }
+          }
+          @media only screen and (min-width: 752px) {
+            div.mobile-only { display: none; }
+          }
+        `}</style>
       </PageWrapper>
     )
   }
-}
-
-const coverWrapperStyle = {
-  height: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  backgroundSize: 'auto 65%',
-  backgroundPosition: '89% 44px',
-  backgroundRepeat: 'no-repeat',
-  fontFamily: "'Source Serif Pro', serif"
-}
-
-const coverBotStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  maxHeight: 91,
-  fontSize: 41
-}
-
-const h1Style = {
-  paddingRight: 30,
-  alignSelf: 'flex-end',
-  marginBottom: 0,
-  fontSize: 41,
-  fontWeight: 600,
-  maxWidth: '40%'
-}
-
-const authorStyle = {
-  margin: 0
-}
-
-const dateStyle = {
-  width: 200,
-  textAlign: 'right',
-  margin: 0
-}
-const teaserStyle = {
-  fontSize: 24,
-  fontWeight: 600,
-  maxWidth: 600,
-  paddingLeft: 0,
-  marginBottom: '-1em'
 }
 
 const bodyStyle = {

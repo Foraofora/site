@@ -7,8 +7,7 @@ import SiteMap from '~/components/SiteMap'
 export default class Menu extends React.Component {
   state = {
     showSignup: false,
-    showSitemap: false,
-    background: false
+    showSitemap: false
   }
 
   render () {
@@ -20,18 +19,18 @@ export default class Menu extends React.Component {
     return (
       <Modal visible={visible} style={{ ...menuModalStyle, backgroundImage: background }} onBgClick={onBgClick}>
         <div style={mainMenuWrapperStyle}>
-          <MenuLink href={{ pathname: '/o-que-e' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='oque' >O que é;</MenuLink>
-          <MenuLink href={{ pathname: '/acoes' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='acoes' >Ações & imaginações;</MenuLink>
+          <MenuLink href={{ pathname: '/o-que-e' }}>O que é;</MenuLink>{' '}
+          <MenuLink href={{ pathname: '/acoes' }}>Ações & imaginações;</MenuLink>
         </div>
         <div style={secondaryMenuWrapperStyle}>
-          <MenuLink onClick={toggleSitemap} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} >Mapa do site;</MenuLink><br />
-          <MenuLink onClick={toggleSignup} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} >Boletim Informativo;</MenuLink>
+          <MenuLink onClick={toggleSitemap}>Mapa do site;</MenuLink><br />
+          <MenuLink onClick={toggleSignup}>Informativo;</MenuLink>
         </div>
         <div style={socialMenuWrapperStyle}>
-          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='fb' >Fb;</MenuLink>
-          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='tw' >Tw;</MenuLink>
-          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='ig' >Ig;</MenuLink>
-          <MenuLink href={{ pathname: 'http://facebook.com' }} onMouseEnter={handleMenuMouseEnter} onMouseLeave={handleMenuMouseLeave} menuKey='yt' >Yt;</MenuLink>
+          <MenuLink href={{ pathname: 'https://www.facebook.com/Fora-330807067434593/' }} >Facebook;</MenuLink>{' '}
+          <MenuLink href={{ pathname: 'https://twitter.com/foraofora' }}>Twitter;</MenuLink>{' '}
+          <MenuLink href={{ pathname: 'https://www.instagram.com/foraofora/' }} >Instagram;</MenuLink>{' '}
+          <MenuLink href={{ pathname: 'https://www.youtube.com/channel/UCWbR2Koag3uPfuaWUktngEg?view_as=subscriber ' }}>YouTube;</MenuLink>
         </div>
         <Modal visible={showSignup} onBgClick={this.toggleSignup}>
           <SignupForm />
@@ -45,20 +44,10 @@ export default class Menu extends React.Component {
 
   toggleSignup = (event) => this.setState({ showSignup: !this.state.showSignup })
   toggleSitemap = (event) => this.setState({ showSitemap: !this.state.showSitemap })
-
-  handleMenuMouseEnter = (key) => {
-    this.setState({ background: `url("/static/menu-${key}.png")` })
-  }
-  handleMenuMouseLeave = () => {
-    this.setState({ background: false })
-  }
 }
 
 const menuModalStyle = {
   background: 'rgba(255,255,255,0.95)',
-  backgroundSize: '80%',
-  backgroundPosition: 'center center',
-  backgroundRepeat: 'no-repeat',
   color: 'black',
   fontFamily: "'Source Serif Pro', serif",
   fontSize: 40,

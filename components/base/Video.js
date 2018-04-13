@@ -1,18 +1,26 @@
 import React from 'react'
-import { withProps, withHandlers, compose } from 'recompose'
 
-const enhance = compose(
-  withProps(console.log)
-)
-
-const handleRef = (node) => {
+const handleRef = (node, autoplay) => {
   if (!node) return
-  node.firstChild.src = node.firstChild.src + '&autoplay=1'
-  node.firstChild.width = node.firstChild.width * 1.5
-  node.firstChild.height = node.firstChild.height * 1.5
+  const iframe = node.firstChild
+  iframe.src += autoplay ? '&autoplay=1' : null
+  iframe.style.position = 'absolute'
+  iframe.style.left = '0'
+  iframe.style.top = '0'
+  iframe.style.bottom = '0'
+  iframe.style.right = '0'
+  iframe.style.width = '100%'
+  iframe.style.height = '100%'
 }
 
-export const Video = ({ html }) =>
-  <div dangerouslySetInnerHTML={{__html: html}} ref={handleRef} />
+export const Video = ({ html, height, width, autoplay, style }) =>
+  <div
+    dangerouslySetInnerHTML={{__html: html}} ref={n => handleRef(n, autoplay)}
+    style={{
+      ...style,
+      paddingTop: height / width * 100 + '%',
+      position: 'relative'
+    }}
+  />
 
-export default enhance(Video)
+export default Video

@@ -5,7 +5,7 @@ export default class SignupForm extends React.Component {
     return (
       <div style={wrapperStyle}>
         <div>
-          <p style={textStyle}>Digite seu e-mail e pressione Enter para receber o Boletim informativo FORA diretamente em sua caixa de e-emails.</p>
+          <p style={textStyle}>Digite aqui seu e-mail e aperte ENTER para ficar por dentro do Fora:</p>
           <input type='text' style={inputStyle} onKeyDown={this.handleKeyDown} />
         </div>
       </div>
@@ -28,21 +28,22 @@ const wrapperStyle = {
   minWidth: 200,
   maxWidth: 800,
   transform: 'translateX(-50%)',
-  color: 'blue'
+  color: 'rgb(0,17,254)'
 }
 
 const textStyle = {
-  maxWidth: 420,
+  maxWidth: 360,
   fontFamily: 'IntervalBook, monospace',
-  fontSize: 14,
-  paddingLeft: 7
+  fontSize: 16,
+  paddingLeft: 7,
+  lineHeight: '1.3em'
 }
 
 const inputStyle = {
   borderWidth: 12,
   borderStyle: 'solid',
-  borderColor: 'blue',
-  color: 'blue',
+  borderColor: 'rgb(0,17,254)',
+  color: 'rgb(0,17,254)',
   width: '100%',
   backgroundColor: 'transparent',
   boxSizing: 'border-box',

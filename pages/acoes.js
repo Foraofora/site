@@ -8,9 +8,10 @@ import ImageGrid from '~/components/ImageGrid'
 import Link from '~/components/MenuLink'
 
 export default class pageAcoes extends React.Component {
-  static async getInitialProps ({ req }) {
+  static async getInitialProps ({ req, query }) {
     const { documents, categories } = await getAcoes()
-    return { documents, categories }
+    const { initialCategory } = query
+    return { documents, categories, initialCategory }
   }
 
   state = {
@@ -18,24 +19,24 @@ export default class pageAcoes extends React.Component {
   }
 
   render () {
-    const { documents, categories } = this.props
+    const { documents, categories, initialCategory } = this.props
     const { selectedCategory } = this.state
     return (
       <PageWrapper title='Ações & imaginações' style={{ background: '#DFDFDF' }}>
         <ContentWrapper>
           <div style={filtersWrapperStyle}>
-            <Title>/Ações & Imaginações</Title>
+            <Title>/Ações & imaginações:</Title>
             <Link href={{ pathname: '/acoes/tags' }}>Palavras-chave;</Link>
           </div>
-          <div style={filtersWrapperStyle}>
+          <div style={{...filtersWrapperStyle, marginBottom: 50}}>
             <CategorySelector
               categories={categories}
-              selected={selectedCategory}
+              selected={selectedCategory || initialCategory}
               onClick={this.handleCategorySelection}
             />
             <Link href={{ pathname: '/acoes/authors' }}>Participantes;</Link>
           </div>
-          <ImageGrid items={documents} category={selectedCategory} />
+          <ImageGrid items={documents} category={selectedCategory || initialCategory} />
         </ContentWrapper>
       </PageWrapper>
     )

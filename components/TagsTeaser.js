@@ -5,7 +5,7 @@ const TagsTeaser = ({ tags }) => {
   if (!tags.length) return false
   return (
     <div className='root' >
-      <p className='title'>Tags</p>
+      <p className='title'>Hashtags</p>
       {tags.map(tag => (
         <div>
           <Link href={{ pathname: '/acoes/tag', query: { tag } }}>
@@ -21,8 +21,8 @@ const TagsTeaser = ({ tags }) => {
         .root {
           text-align: right;
           font-family: IntervalBook, monospace;
-          font-size: 12px;
-          line-height: 1.25em;
+          font-size: 13px;
+          line-height: 1.3em;
         }
       `}</style>
     </div>

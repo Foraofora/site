@@ -38,7 +38,8 @@ const wrapperStyle = {
   marginRight: 10,
   position: 'relative',
   textDecoration: 'none',
-  color: 'black'
+  color: 'black',
+  whiteSpace: 'nowrap'
 }
 
 const checkStyle = {
@@ -48,7 +49,7 @@ const checkStyle = {
 }
 const checkHoverStyle = {
   ...checkStyle,
-  color: 'blue',
+  color: 'rgb(0,17,254)',
   opacity: 1
 }
 const checkSelectedStyle = {

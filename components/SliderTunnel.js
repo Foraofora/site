@@ -4,12 +4,16 @@ import SliderTunnelImage from './SliderTunnelImage'
 
 export default class SliderTunnel extends React.Component {
   state = {
-    slides: [<SliderTunnelImage />],
+    slides: [<a />],
+    shufledDocuments: null,
     currentSlide: 0
   }
 
   componentDidMount () {
-    this.renderNextImage()
+    this.setState({shufledDocuments: shuffleArray(this.props.documents)})
+    setTimeout(this.renderNextImage(), 100)
+    setTimeout(this.renderNextImage(), 110)
+    setTimeout(this.renderNextImage(), 130)
     setInterval(this.renderNextImage, 2000)
   }
 
@@ -23,9 +27,19 @@ export default class SliderTunnel extends React.Component {
 
   renderNextImage = () => {
     const { documents } = this.props
-    const document = documents[Math.floor(Math.random() * documents.length)]
+    const { slides, currentSlide, shufledDocuments } = this.state
+    if (!shufledDocuments) return null
+    if (currentSlide === shufledDocuments.length) {
+      this.setState({currentSlide: 0})
+      return this.renderNextImage()
+    }
+    console.log(currentSlide, shufledDocuments.length)
+    const document = shufledDocuments[currentSlide]
     const nextSlide = <SliderTunnelImage doc={document} />
-    this.setState({ slides: [...this.state.slides, nextSlide] })
+    this.setState({
+      slides: [...slides, nextSlide],
+      currentSlide: currentSlide + 1
+    })
   }
 }
 
@@ -36,4 +50,15 @@ const wrapperStyle = {
   bottom: 0,
   left: 0,
   right: 0
+}
+
+function shuffleArray(array) {
+  let i = array.length - 1;
+  for (; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
 }

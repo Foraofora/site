@@ -16,5 +16,6 @@ export default class CategoryTeaser extends React.Component {
 const wrapperStyle = {
   textAlign: 'right',
   fontFamily: 'IntervalBook, monospace',
-  fontSize: 12
+  fontSize: 13,
+  lineHeight: '1.25em'
 }

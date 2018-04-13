@@ -11,10 +11,15 @@ app.prepare()
   .then(() => {
     const server = express()
 
-    server.get('/acoes/artigo/:id', (req, res) => {
+    server.get('/acoes/artigo/:id/:slug', (req, res) => {
       return app.render(req, res, '/acoes/article', { id: req.params.id })
     })
-
+    server.get('/acoes/materia/:id/:slug', (req, res) => {
+      return app.render(req, res, '/acoes/story', { id: req.params.id })
+    })
+    server.get('/acoes/fotoevideo/:id/:slug', (req, res) => {
+      return app.render(req, res, '/acoes/pictures_and_video', { id: req.params.id })
+    })
     server.get('*', (req, res) => {
       return handle(req, res)
     })

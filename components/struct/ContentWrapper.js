@@ -3,17 +3,22 @@ import React from 'react'
 export default class ContentWrapper extends React.Component {
   render () {
     return (
-      <div style={{ ...wrapperStyle, ...this.props.style }}>
+      <div style={this.props.style}>
         {this.props.children}
+        <style jsx>{`
+          div {
+            padding: 10px;
+            box-sizing: border-box;
+          }
+          @media only screen and (min-width: 752px) {
+            div { padding: 21px 29px; }
+          }
+        `}</style>
       </div>
     )
   }
 }
 
 const wrapperStyle = {
-  paddingTop: 21,
-  paddingLeft: 29,
-  paddingRight: 29,
-  paddingBottom: 21,
-  boxSizing: 'border-box'
+
 }

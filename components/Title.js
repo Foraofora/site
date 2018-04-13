@@ -3,17 +3,23 @@ import React from 'react'
 export default class Title extends React.Component {
   render () {
     return (
-      <h1 style={baseStyle}>
+      <div>
         {this.props.children}
-      </h1>
+        <style jsx>{`
+          div {
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 600;
+            font-size: 28px;
+            margin: 2px 0 50px 75px;
+          }
+          @media only screen and (min-width: 752px) {
+            div {
+              margin: 0 0 0 145px;
+              font-size: 41px;
+            }
+          }
+        `}</style>
+      </div>
     )
   }
-}
-
-const baseStyle = {
-  fontFamily: "'Source Serif Pro', serif",
-  fontWeight: 600,
-  fontSize: 41,
-  margin: 0,
-  marginLeft: 145
 }

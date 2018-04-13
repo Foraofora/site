@@ -15,18 +15,33 @@ class LogoWithMenu extends React.Component {
 
   render () {
     const { menuVisible } = this.state
-    const { slogan, invert, flash } = this.props
+    const { slogan, animation, invert } = this.props
     const logoProps = {
-      invert: menuVisible ? false : invert,
-      flash: menuVisible ? false : flash
+      animation: menuVisible ? false : animation ? animation : 'fade',
+      invert: menuVisible ? false : invert
     }
     return (
       <div>
-        <div style={wrapperStyle}>
+        <div className='root'>
           <Logo {...logoProps} onClick={this.handleLogoClick} />
           {!menuVisible && <span style={textStyle}>{slogan}</span>}
         </div>
         <Menu visible={menuVisible} onBgClick={this.toggleMenu} />
+        <style jsx>{`
+          .root {
+            position: fixed;
+            z-index: 15;
+            top: 10px;
+            left: 10px;
+            max-width: 770px;
+          }
+          @media only screen and (min-width: 752px) {
+            .root {
+              top: 17px;
+              left: 29px;
+            }
+          }
+        `}</style>
       </div>
     )
   }
@@ -36,14 +51,6 @@ class LogoWithMenu extends React.Component {
     this.toggleMenu()
   }
   toggleMenu = () => this.setState({ menuVisible: !this.state.menuVisible })
-}
-
-const wrapperStyle = {
-  position: 'fixed',
-  zIndex: 15,
-  top: 17,
-  left: 29,
-  maxWidth: 750
 }
 
 const textStyle = {

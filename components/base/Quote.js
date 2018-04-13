@@ -1,24 +1,23 @@
 import React from 'react'
-
+import P from '~/components/base/Paragraph'
 export default class Quote extends React.Component {
   render () {
     const { style, quote, source } = this.props
-    const sourceText = source[0].text
+    const sourceText = source.length && source[0].text
     return (
-      <div style={{ ...baseStyle, ...style }}>
-        <div style={quoteStyle}>"{quote[0].text}"</div>
-        {sourceText && <div style={sourceStyle}>― {sourceText}</div>}
-      </div>
+      <P style={{...style, ...wrapperStyle}}>
+        <div style={{paddingLeft: '20%'}}>
+          <div style={quoteStyle}>{quote[0].text}</div>
+          {sourceText ? <div style={sourceStyle}>{sourceText}</div> : null}
+        </div>
+      </P>
     )
   }
 }
 
-const baseStyle = {
-  paddingLeft: '50%',
-  paddingRight: '5%',
-  margin: '50px 0'
+const wrapperStyle = {
+  margin: '60px auto'
 }
-
 const quoteStyle = {
   fontSize: 24,
   fontFamily: "'Source Serif Pro', serif",
@@ -29,5 +28,6 @@ const sourceStyle = {
   fontSize: 12,
   fontFamily: 'IntervalBook, monospace',
   maxWidth: '55%',
-  marginTop: 26
+  marginTop: 26,
+  lineHeight: '1.3em'
 }
