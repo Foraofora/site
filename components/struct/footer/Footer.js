@@ -16,7 +16,7 @@ export default class Footer extends React.Component {
             </div>
           </P>
         </ContentWrapper>
-        <a href=''>
+        <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt_BR'>
           <CC style={ccText} /><span style={ccText}>Todo o conteúdo produzido pelo Fora pode ser copiado, redistribuído e transformado para fins não comerciais, desde que atribuam o devido crédito e que licenciem as novas criações sob termos idênticos.</span>
         </a>
         <style jsx>{`
@@ -52,7 +52,7 @@ const ccText = {
 }
 
 const contactTextStyle = {
-  fontSize: 26,
+  fontSize: 29,
   fontFamily: "'Source Serif Pro', serif",
   fontWeight: 600,
   margin: '80px 0 50px 0'

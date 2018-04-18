@@ -46,7 +46,7 @@ export default class Story extends React.Component {
               { title }
               <br /><br />
               <span style={{ fontWeight: 400 }}>
-                { authorName && <span>Por<br />{`${authorName}`}</span> }
+                { authorName && <span><span style={{fontSize: 24, fontWeight: 600}}>Por</span><br />{`${authorName}`}</span> }
               </span>
             </h1>
             <div style={imageWrapperStyle}>

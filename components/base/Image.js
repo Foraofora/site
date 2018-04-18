@@ -45,8 +45,9 @@ const baseStyle = {
   maxHeight: '100%',
   height: 'auto',
   width: 'auto',
-  overflow: 'hidden',
-  verticalAlign: 'middle'
+  //overflow: 'hidden',
+  //verticalAlign: 'middle',
+  objectFit: 'contain'
 }
 
 const lazyStyle = {

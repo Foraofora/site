@@ -9,13 +9,13 @@ export default class MenuModal extends React.Component {
         style={visible ? { ...showStyle, ...this.props.style } : { ...hideStyle, ...this.props.style }}
         onClick={this._onBgClick}
       >
-        {children}
+        {visible && children}
       </div>
     )
   }
 
   _onBgClick = (event) => {
-    if (!event.target.classList.contains('modal')) return
+    if (!event.target.classList.contains('modal')) return console.log(event.target)
     this.props.onBgClick && this.props.onBgClick(event)
     event.stopPropagation()
   }

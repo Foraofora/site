@@ -21,13 +21,11 @@ export default class PhotosAndVideosCover extends React.Component {
         </Title>
         <div style={coverMidStyle}>
           <h1 style={h1Style}>{ doc.data.title[0].text }</h1>
-          <div style={imageWrapperStyle}>
-            <ImageGalery media={{videos, photos}} />
-          </div>
+          <ImageGalery media={{videos, photos}} />
         </div>
         <div style={coverBotStyle}>
           <p style={dateStyle} />
-          <p style={authorStyle}>{ authorName && `Por ${authorName}` }</p>
+          <p style={authorStyle}>{ authorName && <span><span style={{fontSize: 24, fontWeight: 600}}>Por</span> {authorName}</span> }</p>
           <p style={dateStyle}>{moment(Date(date)).format('DD.MM.YY')}</p>
         </div>
       </ContentWrapper>
@@ -49,7 +47,8 @@ const coverWrapperStyle = {
 }
 const coverMidStyle = {
   display: 'flex',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  flex: 1
 }
 const coverBotStyle = {
   display: 'flex',
@@ -57,22 +56,13 @@ const coverBotStyle = {
   paddingTop: 10,
   maxHeight: 52
 }
-const imageWrapperStyle = {
-  marginTop: 30,
-  marginBottom: 12,
-  textAlign: 'right',
-  flex: 1,
-  maxWidth: '60%'
-}
 
 const h1Style = {
   paddingRight: 30,
   fontSize: 41,
   fontWeight: 600,
   alignSelf: 'flex-end',
-  margin: 0,
-  maxWidth: '40%',
-  minWidth: '30%'
+  margin: 0
 }
 
 const authorStyle = {

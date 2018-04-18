@@ -26,10 +26,10 @@ class LogoSvg extends React.Component {
           }
           .pulse #teste {
             -webkit-animation-name: pulse;
-            -webkit-animation-duration: .2s;
+            -webkit-animation-duration: .4s;
             -webkit-animation-iteration-count: infinite;
-            -moz-animation: pulse .2s infinite;
-            animation: pulse .3s infinite;
+            -moz-animation: pulse .4s infinite;
+            animation: pulse .4s infinite;
           }
           .fade #teste {
             -webkit-animation-name: fade;
@@ -40,12 +40,15 @@ class LogoSvg extends React.Component {
             animation: fade 3s linear infinite;
           }
           @keyframes pulse {
-            50% {fill: initial;}
-            99% {fill: rgb(0,17,254);}
+            0% {fill: initial;}
+            20% {fill: initial;}
+            60% {fill: rgb(0,17,254);}
+            100% {fill: rgb(0,17,254);}
           }
           @keyframes fade {
             0% {opacity: 0}
-            50% {opacity: 1;}
+            30% {opacity: 1;}
+            70% {opacity: 1;}
             100% {opacity: 0;}
           }
         `}}
@@ -58,7 +61,8 @@ class LogoSvg extends React.Component {
         <style jsx>{`
           svg {
             width: 114px;
-            height: 45px;
+            height: 43px;
+            margin-bottom: -2px;
           }
         `}</style>
       </svg>

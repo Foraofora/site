@@ -1,21 +1,55 @@
 import React from 'react'
+import axios from 'axios'
 
 export default class SignupForm extends React.Component {
+  state = {
+    success: false,
+    error: false
+  }
+
   render () {
     return (
       <div style={wrapperStyle}>
         <div>
           <p style={textStyle}>Digite aqui seu e-mail e aperte ENTER para ficar por dentro do Fora:</p>
           <input type='text' style={inputStyle} onKeyDown={this.handleKeyDown} />
+          {this.state.success && <p style={textStyle}>Seu e-mail foi adicionado com sucesso.</p>}
+          {this.state.error && <p style={{...textStyle, color: 'red'}}>O e-mail inserido não é valido.</p>}
         </div>
       </div>
     )
   }
 
   handleKeyDown = (e) => {
+    const self = this
     if (e.keyCode !== 13) return
-    console.log('enter')
+    if (!validateEmail(e.target.value)) return self.setState({
+      success: false,
+      error: true
+    })
+
+    axios.post('/signup/' + e.target.value, {
+    })
+      .then(function (response) {
+        self.setState({
+          success: true,
+          error: false
+        })
+      })
+      .catch(function (error) {
+        if (error) {
+          self.setState({
+            error: true,
+            success: false
+          })
+        }
+      })
   }
+}
+
+const validateEmail = (email) => {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 }
 
 const wrapperStyle = {
