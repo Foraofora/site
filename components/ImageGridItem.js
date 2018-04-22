@@ -37,7 +37,7 @@ export default class ImageGridItem extends React.Component {
 
   renderPhotos = () => {
     const photos = this.props.data.photos || [{photo: this.props.data.cover}]
-    const photosOrVideo = !photos.length ? [{photo: {thumb: {
+    const photosOrVideo = photos.length < 1 ? [{photo: {thumb: {
       url: this.props.data.videos[0].video.thumbnail_url,
       dimensions: {
         height: this.props.data.videos[0].video.height,
@@ -46,15 +46,15 @@ export default class ImageGridItem extends React.Component {
     }}}] : photos
     return (
       <div>
-        <div style={{ ...imageWrapperStyle, transform: photos[1] && 'translate3d(21px, -21px, 0)' }}>
-          <Image {...photosOrVideo[0].photo.thumb} style={imageStyle} />
-        </div>
+        {photosOrVideo[2] && <div style={{ ...imageWrapperStyle, transform: 'translate3d(21px, -21px, 0)' }}>
+          <Image {...photosOrVideo[2].photo.thumb} style={imageStyle} />
+        </div>}
         {photosOrVideo[1] && <div style={{ ...imageWrapperStyle, transform: 'translate3d(7px, -7px, 0)' }}>
-          <Image {...photosOrVideo[1].photo.thumb} style={imageStyle} loadDelay={150} />
+          <Image {...photosOrVideo[1].photo.thumb} style={imageStyle} loadDelay={200} />
         </div>}
-        {photosOrVideo[2] && <div style={{ ...imageWrapperStyle, transform: 'translate3d(-7px, 7px, 0)' }}>
-          <Image {...photosOrVideo[2].photo.thumb} style={imageStyle} loadDelay={350} />
-        </div>}
+        <div style={{ ...imageWrapperStyle, transform: photos[1] && 'translate3d(-7px, 7px, 0)' }}>
+          <Image {...photosOrVideo[0].photo.thumb} style={imageStyle} loadDelay={400} />
+        </div>
       </div>
     )
   }
