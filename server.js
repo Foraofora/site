@@ -26,7 +26,7 @@ app.prepare()
     server.post('/signup/:email', (req, res) => {
       console.log(req.params.email)
       var mailchimpApiUrl = 'https://us12.api.mailchimp.com/3.0'
-      var apiKey = '1abb2200ade55136563d9674145b25ee-us12';
+      var apiKey = process.env.MAILCHIMP_K;
 
       axios({
         method: 'POST',
