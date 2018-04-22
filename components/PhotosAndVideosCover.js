@@ -21,7 +21,7 @@ export default class PhotosAndVideosCover extends React.Component {
         </Title>
         <div style={coverMidStyle}>
           <h1 style={h1Style}>{ doc.data.title[0].text }</h1>
-          <ImageGalery media={{videos, photos}} />
+          <ImageGalery media={{videos, photos}} style={{flex: 1, textAlign: 'right', position: 'relative'}}/>
         </div>
         <div style={coverBotStyle}>
           <p style={dateStyle} />
@@ -40,15 +40,14 @@ const invertStyle = {
 }
 const coverWrapperStyle = {
   ...invertStyle,
-  height: '100vh',
+  //height: '100vh',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between'
 }
 const coverMidStyle = {
   display: 'flex',
-  justifyContent: 'space-between',
-  flex: 1
+  maxHeight: 'calc(98% - 130px)'
 }
 const coverBotStyle = {
   display: 'flex',
@@ -58,11 +57,13 @@ const coverBotStyle = {
 }
 
 const h1Style = {
-  paddingRight: 30,
+  paddingRight: 50,
   fontSize: 41,
   fontWeight: 600,
+  margin: 0,
+  flex: 0.56,
   alignSelf: 'flex-end',
-  margin: 0
+  marginBottom: '-0.30em'
 }
 
 const authorStyle = {

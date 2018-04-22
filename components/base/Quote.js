@@ -25,7 +25,7 @@ const quoteStyle = {
 }
 
 const sourceStyle = {
-  fontSize: 12,
+  fontSize: 13,
   fontFamily: 'IntervalBook, monospace',
   maxWidth: '55%',
   marginTop: 26,

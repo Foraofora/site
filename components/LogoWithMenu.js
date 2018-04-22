@@ -37,7 +37,7 @@ class LogoWithMenu extends React.Component {
           }
           @media only screen and (min-width: 752px) {
             .root {
-              top: 17px;
+              top: 18px;
               left: 29px;
             }
           }

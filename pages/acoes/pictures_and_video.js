@@ -26,7 +26,7 @@ export default class Index extends React.Component {
         <div className='desktop-only'><PhotosAndVideosCover {...this.props} /></div>
         <div className='mobile-only'><PhotosAndVideosCoverMobile {...this.props} /></div>
 
-        <ContentWrapper style={{ paddingBottom: '70px', position: 'relative', ...invertStyle }}>
+        <ContentWrapper style={{ paddingBottom: '70px', paddingTop: '50px', position: 'relative', ...invertStyle }}>
           <Sidebars doc={doc} />
           <P style={bodyStyle}>{ doc.data.corpo }</P>
           <AuthorTeaser author={author} style={{ marginTop: 80, paddingLeft: 0 }} />
